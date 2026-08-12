@@ -1,0 +1,134 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FinAgentBench — Can LLM agents do finance research?</title>
+<style>
+:root{--fg:#1a1d23;--muted:#6b7280;--line:#e5e7eb;--acc:#0b6e4f;--bg:#fcfcfd}
+*{box-sizing:border-box}body{margin:0;font:16px/1.65 -apple-system,'Segoe UI',Roboto,sans-serif;color:var(--fg);background:var(--bg)}
+.wrap{max-width:980px;margin:0 auto;padding:48px 24px}
+h1{font-size:2rem;margin:.2em 0}h2{margin-top:2.2em;border-bottom:2px solid var(--line);padding-bottom:.3em}
+.sub{color:var(--muted);font-size:1.05rem}
+table{border-collapse:collapse;width:100%;margin:1em 0;font-size:.92rem}
+th{background:#f3f4f6;text-align:left}th,td{border:1px solid var(--line);padding:6px 10px}
+tr:nth-child(even) td{background:#fafafa}
+.note{background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px 16px;font-size:.9rem}
+.kpi{display:flex;gap:16px;flex-wrap:wrap;margin:1.2em 0}
+.kpi div{flex:1;min-width:180px;border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:#fff}
+.kpi b{display:block;font-size:1.5rem;color:var(--acc)}
+footer{margin-top:3em;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padding-top:1em}
+</style></head><body><div class="wrap">
+<h1>FinAgentBench</h1>
+<p class="sub">Can LLM agents do quantitative finance research? Two capabilities, measured
+separately on private data: <b>execution</b> (replicate a result from a written method
+spec + raw data) and <b>judgment</b> (predict returns from financial text). All models
+run through one identical harness on a single inference platform.</p>
+<div class="kpi">
+<div><b>13/13</b>models replicate a momentum study perfectly from spec (Track A is saturated at the entry tier)</div>
+<div><b>58×</b>cost spread between the cheapest and priciest perfect replication</div>
+<div><b>IC ≈ 0.5 vs 0.2</b>flagship-vs-small gap reading full analyst articles — judgment is where models differ</div>
+</div>
+<h2>Track A — Execution: replicate from spec</h2>
+<p>The agent gets a task sheet (method spelled out, results withheld), read-only data, a bash sandbox, and a 40-step budget. Grading is scripted: each submitted statistic vs ground truth (loose ±5% / strict ±1%). Samples are private extracts, so published numbers can't be recalled from training.</p>
+<h3>T1 · 20-stock momentum</h3>
+<table><tr><th>Model</th><th>Strict</th><th>Loose</th><th>Consistency (strict across seeds)</th><th>Best steps</th><th>Best cost</th></tr>
+<tr><td>Claude Opus 5</td><td>1.0</td><td>1.0</td><td>5/5</td><td>2</td><td>$0.0553</td></tr>
+<tr><td>Claude Sonnet 5</td><td>1.0</td><td>1.0</td><td>5/5</td><td>1</td><td>$0.0188</td></tr>
+<tr><td>DeepSeek V4 Flash</td><td>1.0</td><td>1.0</td><td>5/5</td><td>4</td><td>$0.0038</td></tr>
+<tr><td>DeepSeek V4 Pro</td><td>1.0</td><td>1.0</td><td>5/5</td><td>3</td><td>$0.0297</td></tr>
+<tr><td>GLM 5.2</td><td>1.0</td><td>1.0</td><td>4/5</td><td>2</td><td>$0.0154</td></tr>
+<tr><td>GPT-5.4</td><td>1.0</td><td>1.0</td><td>5/5</td><td>1</td><td>$0.0193</td></tr>
+<tr><td>GPT-5.6 Sol</td><td>1.0</td><td>1.0</td><td>1/5</td><td>1</td><td>$0.0296</td></tr>
+<tr><td>Gemini 3.1 Pro</td><td>1.0</td><td>1.0</td><td>4/5</td><td>2</td><td>$0.0775</td></tr>
+<tr><td>Gemma 4 31B</td><td>1.0</td><td>1.0</td><td>5/5</td><td>1</td><td>$0.0010</td></tr>
+<tr><td>Grok 4.5</td><td>1.0</td><td>1.0</td><td>5/5</td><td>2</td><td>$0.0204</td></tr>
+<tr><td>Kimi K3</td><td>1.0</td><td>1.0</td><td>5/5</td><td>2</td><td>$0.0270</td></tr>
+<tr><td>MiMo V2.5</td><td>1.0</td><td>1.0</td><td>5/5</td><td>2</td><td>$0.0013</td></tr>
+<tr><td>Qwen3.8 Max</td><td>1.0</td><td>1.0</td><td>4/5</td><td>3</td><td>$0.0294</td></tr>
+</table>
+<h3>T2 · News event study</h3>
+<table><tr><th>Model</th><th>Strict</th><th>Loose</th><th>Consistency (strict across seeds)</th><th>Best steps</th><th>Best cost</th></tr>
+<tr><td>Claude Opus 5</td><td>1.0</td><td>1.0</td><td>5/5</td><td>2</td><td>$0.0607</td></tr>
+<tr><td>Claude Sonnet 5</td><td>1.0</td><td>1.0</td><td>5/5</td><td>1</td><td>$0.0180</td></tr>
+<tr><td>DeepSeek V4 Flash</td><td>1.0</td><td>1.0</td><td>5/5</td><td>5</td><td>$0.0037</td></tr>
+<tr><td>DeepSeek V4 Pro</td><td>1.0</td><td>1.0</td><td>4/5</td><td>4</td><td>$0.0470</td></tr>
+<tr><td>GLM 5.2</td><td>1.0</td><td>1.0</td><td>5/5</td><td>3</td><td>$0.0205</td></tr>
+<tr><td>GPT-5.4</td><td>1.0</td><td>1.0</td><td>5/5</td><td>1</td><td>$0.0190</td></tr>
+<tr><td>GPT-5.6 Sol</td><td>1.0</td><td>1.0</td><td>5/5</td><td>1</td><td>$0.0285</td></tr>
+<tr><td>Gemini 3.1 Pro</td><td>1.0</td><td>1.0</td><td>4/5</td><td>2</td><td>$0.0571</td></tr>
+<tr><td>Gemma 4 31B</td><td>1.0</td><td>1.0</td><td>5/5</td><td>1</td><td>$0.0008</td></tr>
+<tr><td>Grok 4.5</td><td>1.0</td><td>1.0</td><td>5/5</td><td>2</td><td>$0.0220</td></tr>
+<tr><td>Kimi K3</td><td>1.0</td><td>1.0</td><td>5/5</td><td>2</td><td>$0.0330</td></tr>
+<tr><td>MiMo V2.5</td><td>1.0</td><td>1.0</td><td>4/5</td><td>2</td><td>$0.0011</td></tr>
+<tr><td>Qwen3.8 Max</td><td>1.0</td><td>1.0</td><td>5/5</td><td>2</td><td>$0.0339</td></tr>
+</table>
+<h3>T3 · Covered-call option backtest</h3>
+<table><tr><th>Model</th><th>Strict</th><th>Loose</th><th>Consistency (strict across seeds)</th><th>Best steps</th><th>Best cost</th></tr>
+<tr><td>Claude Opus 5</td><td>1.0</td><td>1.0</td><td>—</td><td>2</td><td>$0.1268</td></tr>
+<tr><td>Claude Sonnet 5</td><td>1.0</td><td>1.0</td><td>—</td><td>10</td><td>$0.2537</td></tr>
+<tr><td>DeepSeek V4 Flash</td><td>1.0</td><td>1.0</td><td>—</td><td>32</td><td>$0.1155</td></tr>
+<tr><td>DeepSeek V4 Pro</td><td>1.0</td><td>1.0</td><td>—</td><td>21</td><td>$0.7153</td></tr>
+<tr><td>GLM 5.2</td><td>1.0</td><td>1.0</td><td>—</td><td>14</td><td>$0.3479</td></tr>
+<tr><td>GPT-5.4</td><td>1.0</td><td>1.0</td><td>—</td><td>7</td><td>$0.1813</td></tr>
+<tr><td>Gemini 3.1 Pro</td><td>1.0</td><td>1.0</td><td>—</td><td>16</td><td>$0.7649</td></tr>
+<tr><td>Gemma 4 31B</td><td>1.0</td><td>1.0</td><td>—</td><td>6</td><td>$0.0109</td></tr>
+<tr><td>Grok 4.5</td><td>1.0</td><td>1.0</td><td>—</td><td>5</td><td>$0.1129</td></tr>
+<tr><td>Kimi K3</td><td>1.0</td><td>1.0</td><td>—</td><td>4</td><td>$0.2244</td></tr>
+<tr><td>MiMo V2.5</td><td>1.0</td><td>1.0</td><td>—</td><td>11</td><td>$0.0226</td></tr>
+<tr><td>Qwen3.8 Max</td><td>1.0</td><td>1.0</td><td>—</td><td>13</td><td>$0.3382</td></tr>
+<tr><td>GPT-5.6 Sol</td><td>0.6</td><td>0.7</td><td>—</td><td>2</td><td>$0.0718</td></tr>
+</table>
+<h3>T4 · Full-market momentum (11GB)</h3>
+<table><tr><th>Model</th><th>Strict</th><th>Loose</th><th>Consistency (strict across seeds)</th><th>Best steps</th><th>Best cost</th></tr>
+<tr><td>Claude Opus 5</td><td>1.0</td><td>1.0</td><td>—</td><td>5</td><td>$0.1968</td></tr>
+<tr><td>Claude Sonnet 5</td><td>1.0</td><td>1.0</td><td>—</td><td>11</td><td>$0.2056</td></tr>
+<tr><td>DeepSeek V4 Pro</td><td>1.0</td><td>1.0</td><td>—</td><td>13</td><td>$0.3799</td></tr>
+<tr><td>GLM 5.2</td><td>1.0</td><td>1.0</td><td>—</td><td>26</td><td>$0.3970</td></tr>
+<tr><td>Gemma 4 31B</td><td>1.0</td><td>1.0</td><td>—</td><td>5</td><td>$0.0054</td></tr>
+<tr><td>Grok 4.5</td><td>1.0</td><td>1.0</td><td>—</td><td>3</td><td>$0.0381</td></tr>
+<tr><td>Kimi K3</td><td>1.0</td><td>1.0</td><td>—</td><td>11</td><td>$0.2920</td></tr>
+<tr><td>MiMo V2.5</td><td>1.0</td><td>1.0</td><td>—</td><td>5</td><td>$0.0073</td></tr>
+<tr><td>Qwen3.8 Max</td><td>1.0</td><td>1.0</td><td>—</td><td>19</td><td>$0.7046</td></tr>
+<tr><td>GPT-5.4</td><td>0.8</td><td>1.0</td><td>—</td><td>1</td><td>$0.0300</td></tr>
+<tr><td>Gemini 3.1 Pro</td><td>0.4</td><td>1.0</td><td>—</td><td>30</td><td>$1.0432</td></tr>
+<tr><td>DeepSeek V4 Flash</td><td>0.2</td><td>0.4</td><td>—</td><td>20</td><td>$0.0372</td></tr>
+<tr><td>GPT-5.6 Sol</td><td>0.0</td><td>0.0</td><td>—</td><td>—</td><td>—</td></tr>
+</table>
+<h2>Track B — Judgment: predict returns from text</h2>
+<h3>B1 · News headlines</h3><p>1,008 stratified news events on 20 mega-caps (2004–2024) from an institutional news-event dataset. Model sees headline + ticker + date + trailing stats; predicts 5-day beta-adjusted return. Control: headline withheld (memorization baseline).</p>
+<table><tr><th>Model</th><th>n</th><th>Hit rate</th><th>Spearman IC</th><th>L/S spread (bps)</th><th>Control IC</th></tr>
+<tr><td>Qwen3.8 Max</td><td>1000</td><td>0.5612</td><td>0.1658</td><td>344.2</td><td>0.1973</td></tr>
+<tr><td>Claude Sonnet 5</td><td>1008</td><td>0.5481</td><td>0.1435</td><td>425.9</td><td>0.1187</td></tr>
+<tr><td>GLM 5.2</td><td>919</td><td>0.5531</td><td>0.1368</td><td>345.2</td><td>0.0438</td></tr>
+<tr><td>DeepSeek V4 Flash</td><td>986</td><td>0.528</td><td>0.052</td><td>103.8</td><td>0.0236</td></tr>
+<tr><td>Gemma 4 31B</td><td>1008</td><td>0.5154</td><td>0.0377</td><td>43.6</td><td>0.0362</td></tr>
+<tr><td>MiMo V2.5</td><td>1006</td><td>0.5082</td><td>0.0145</td><td>77.6</td><td>0.0324</td></tr>
+</table>
+<h3>B2 · Analyst articles (post-cutoff)</h3><p>Full-text investment research articles published Apr–Aug 2026 — after the training cutoff of the models under test. Model predicts 20-day market-adjusted return. Control: article withheld.</p>
+<table><tr><th>Model</th><th>n</th><th>Hit rate</th><th>Spearman IC</th><th>IC (Jun–Jul only)</th><th>Cutoff</th><th>L/S spread (bps)</th><th>Control IC</th></tr>
+<tr><td>Claude Sonnet 5</td><td>297</td><td>0.4678</td><td>0.3889</td><td>0.4161</td><td>2026-01</td><td>2198.1</td><td>-0.1583</td></tr>
+<tr><td>Qwen3.8 Max</td><td>55</td><td>0.6111</td><td>0.2455</td><td></td><td>UNDISCLOSED ⚠️</td><td>2093.0</td><td></td></tr>
+<tr><td>DeepSeek V4 Flash</td><td>280</td><td>0.4286</td><td>0.2182</td><td>0.2385</td><td>UNDISCLOSED ⚠️</td><td>1747.1</td><td>-0.0293</td></tr>
+<tr><td>GLM 5.2</td><td>282</td><td>0.4107</td><td>0.1885</td><td>0.2317</td><td>UNDISCLOSED ⚠️</td><td>1648.6</td><td>0.0238</td></tr>
+<tr><td>MiMo V2.5</td><td>297</td><td>0.4276</td><td>0.1866</td><td>0.2055</td><td>2024-12</td><td>1072.5</td><td>0.0408</td></tr>
+<tr><td>Gemma 4 31B</td><td>297</td><td>0.415</td><td>0.1319</td><td>0.1251</td><td>2025-01</td><td>747.9</td><td></td></tr>
+</table>
+<h3>B3 · SEC filing MD&A</h3><p>Management's Discussion & Analysis sections from 10-K/20-F filings of 33 AI-infrastructure companies (2017–2024); predict 20-day post-filing market-adjusted drift. Control: text withheld.</p>
+<table><tr><th>Model</th><th>n</th><th>Hit rate</th><th>Spearman IC</th><th>L/S spread (bps)</th><th>Control IC</th></tr>
+<tr><td>Qwen3.8 Max</td><td>166</td><td>0.5542</td><td>0.2684</td><td>941.5</td><td></td></tr>
+<tr><td>GLM 5.2</td><td>179</td><td>0.5028</td><td>0.1474</td><td>786.6</td><td>0.2724</td></tr>
+<tr><td>DeepSeek V4 Flash</td><td>187</td><td>0.5135</td><td>0.0993</td><td>327.1</td><td>0.1499</td></tr>
+<tr><td>Gemma 4 31B</td><td>204</td><td>0.5588</td><td>0.0739</td><td>304.3</td><td>0.1181</td></tr>
+<tr><td>Claude Sonnet 5</td><td>204</td><td>0.4745</td><td>0.0303</td><td>10.2</td><td>0.2044</td></tr>
+<tr><td>MiMo V2.5</td><td>203</td><td>0.4455</td><td>-0.0428</td><td>-195.2</td><td>0.0551</td></tr>
+</table>
+<h2>Honest caveats</h2><div class="note"><ul>
+<li>Track B2's "post-cutoff" claim is per-model: models released mid-2026 may have
+training data extending into the article window; a per-model cutoff table is in
+progress. Withheld-text controls bound the contamination for every track.</li>
+<li>Article/filing forward windows overlap in calendar time, so cross-sectional
+correlation inflates naive significance; treat Track B as a <i>ranking</i> across
+models on a common sample, not a tradable alpha estimate.</li>
+<li>Small samples where noted (B2 n<500); error bars matter and seeds are being added.</li>
+<li>Underlying market and text datasets are licensed; this page publishes
+aggregates only.</li></ul></div>
+<footer>FinAgentBench · Agentic Sciences research · results generated programmatically from run logs; no numbers are hand-entered.</footer>
+</div></body></html>
