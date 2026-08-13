@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>We Gave 23 AIs the Same Finance Exams. Here's What Happened.</title>
+<style>
+:root{--fg:#1a1d23;--muted:#6b7280;--line:#e5e7eb;--acc:#0b6e4f;--bg:#fcfcfd}
+*{box-sizing:border-box}body{margin:0;font:18px/1.75 Georgia,'Times New Roman',serif;color:var(--fg);background:var(--bg)}
+.wrap{max-width:720px;margin:0 auto;padding:56px 24px}
+h1{font-size:2.1rem;line-height:1.25;margin:.2em 0}
+h2{font-size:1.4rem;margin-top:2em;font-family:-apple-system,'Segoe UI',sans-serif}
+.sub{color:var(--muted);font-size:1.05rem;font-family:-apple-system,'Segoe UI',sans-serif}
+.big{background:#f0fdf4;border-left:4px solid var(--acc);padding:14px 18px;margin:1.4em 0;font-size:1.05rem}
+.warn{background:#fffbeb;border-left:4px solid #f59e0b;padding:14px 18px;margin:1.4em 0;font-size:.98rem}
+table{border-collapse:collapse;width:100%;margin:1.2em 0;font:.85rem -apple-system,'Segoe UI',sans-serif}
+th{background:#f3f4f6;text-align:left}th,td{border:1px solid var(--line);padding:6px 10px}
+a{color:var(--acc)}
+footer{margin-top:3em;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padding-top:1em;font-family:-apple-system,sans-serif}
+</style></head><body><div class="wrap">
+
+<p class="sub"><a href="index.html">← Full results &amp; methodology</a></p>
+
+<h1>We Gave 23 AIs the Same Finance Exams. Here's What Happened.</h1>
+<p class="sub">A plain-language tour of FinAgentBench — two days, ~$600 of
+computing credits, one identical test harness, and some results that surprised us.</p>
+
+<h2>The two skills</h2>
+<p>When people ask "can AI do finance research?", they're really asking about two
+very different skills. The first is <b>doing the work</b>: take a research recipe
+and a pile of raw market data, write the code, and get the right numbers out —
+what a good research assistant does. The second is <b>judgment</b>: read something
+— a news story, an analyst's essay, an earnings report — and correctly guess what
+happens to the stock next. That's the skill that makes money, and it's much rarer
+in humans too.</p>
+<p>We tested both, separately, on data an AI cannot have memorized. That last part
+turns out to be the whole game — more on that below.</p>
+
+<h2>Finding 1: the "research assistant" job is essentially solved</h2>
+<p>We wrote five replication tasks of increasing difficulty — from "compute a
+momentum strategy on 20 stocks" up to "replicate the core results of a famous
+academic machine-learning paper, training four models along the way." Each AI got
+the recipe, the raw data, a terminal, and a step budget. A script — not a human,
+not another AI — graded every number they submitted against ground truth we
+computed ourselves.</p>
+<p>On the first four tasks, essentially <b>every model aced it</b> — including a
+small open-source model that did a perfect replication for a tenth of a cent.
+Only the fifth task, the academic-paper-scale one, split the field: 6 of 13
+models got everything right; the rest trained the machine-learning models
+correctly but fumbled details of the portfolio accounting.</p>
+<div class="big">What used to be weeks of a research assistant's time is now
+minutes and pennies. The cost difference between the cheapest and most expensive
+AI that both produce a perfect result: up to <b>200×</b>.</div>
+<p>The catch is reliability. Re-running the same task five times, most models
+were perfect five out of five — but a few occasionally produced a wrong number
+with full confidence, and about 6% of runs failed for boring infrastructure
+reasons (provider API quirks). If you employ an AI research assistant, you still
+need to check its work — which is exactly what surveys of companies deploying AI
+agents report.</p>
+
+<h2>Finding 2: beware — AIs have memorized the stock market's past</h2>
+<p>Here's the result that should change how you read every "AI predicts stocks"
+headline. We showed models 1,008 historical news events (2004–2024) and asked
+them to predict each stock's next five days. Then we ran the exact same test
+<b>with the news hidden</b> — the model saw only the ticker and the date.</p>
+<p>The best model predicted the past <i>better with the news hidden</i>. Given
+just "Apple, March 2, 2013", it ranked what happened next with startling accuracy
+— because those years of market history are in its training data. It isn't
+reading the news; it's remembering the answer key. The same thing happened, even
+more strongly, with Federal Reserve announcements: one model "predicted" the
+market's reaction to past Fed meetings with 90% accuracy — with the Fed statement
+completely hidden.</p>
+<div class="warn">Any backtest of an AI predicting markets <i>before its training
+cutoff</i> is suspect unless it includes this hidden-text control. Most published
+demos don't.</div>
+
+<h2>Finding 3: on a fair test, real judgment exists — and it just jumped</h2>
+<p>The fair test: nearly 300 investment-research essays published in
+<b>April–August 2026 — after the training cutoff of the models being tested</b>.
+No answer key to remember. Models read each essay and predicted the stock's next
+20 trading days relative to the market.</p>
+<p>Three things stood out. First, hide the essay and every model collapses to
+coin-flipping — so whatever signal exists comes from actually reading. Second,
+there's a real ladder: small cheap models show modest but genuine skill, big
+frontier models show clearly more. Third, the newest frontier generation is a
+step change, not a gradual improvement — one family's four previous versions all
+scored in a tight band, and its newest model <b>doubled</b> the score.</p>
+
+<h2>Finding 4: what you read matters more than which AI reads it</h2>
+<p>We ran the same experiment on seven kinds of financial text. The pattern is
+economically sensible and very consistent:</p>
+<table>
+<tr><th>Text the AI reads</th><th>Predictive value</th><th>Why</th></tr>
+<tr><td>Analysts' opinion essays</td><td><b>Real signal</b></td><td>Interpretations spread slowly through markets</td></tr>
+<tr><td>Famous funds' quarterly holdings disclosures</td><td>Positive (small sample)</td><td>"Smart money" trades keep drifting after disclosure</td></tr>
+<tr><td>Earnings press releases</td><td>None</td><td>Hard numbers are priced in within minutes</td></tr>
+<tr><td>Earnings call transcripts</td><td>None</td><td>Same — by the next day it's all in the price</td></tr>
+<tr><td>Fed statements</td><td>None beyond memory</td><td>Macro news is priced instantly</td></tr>
+<tr><td>Single news headlines</td><td>Barely any</td><td>One sentence is too thin</td></tr>
+</table>
+<p>In short: AI adds value where information diffuses slowly — opinions,
+interpretations, disclosures with a lag. It adds nothing where the market has
+already reacted.</p>
+
+<h2>Finding 5: does it actually make money?</h2>
+<p>We turned the essay-reading predictions into simulated weekly portfolios —
+buy the stocks each AI was most bullish on, short the ones it was most bearish
+on, hold a month, subtract trading costs. Over the three months of data,
+<b>all ten configurations we tried came out positive</b>, several strongly so.
+The predictions also replicate: run the same model twice and its predictions
+correlate about 0.9.</p>
+<div class="warn">Three months is a very short backtest, concentrated in
+AI-related stocks, in one market regime. The honest claims are: the ranking skill
+is real and stable; the strategy simulation is <i>consistent with</i> it being
+tradable, and far from proof. To keep ourselves honest we've begun
+<b>pre-registering live predictions</b> on brand-new articles — locked into this
+site's public history before the outcomes exist — so future readers can check us
+against reality.</div>
+
+<h2>What it cost, and why that's the real story</h2>
+<p>Everything above — five replication exams, seven text experiments across
+~1,800 labeled events, 23 models, reliability re-runs — consumed about <b>$600
+of computing credits and two days</b>, orchestrated end-to-end by an AI agent
+(which also wrote this page, and got its own errors graded along the way). A
+comparable human-powered study — the kind with 25 authors, 306 survey
+respondents, and a year of calendar time — costs a six-figure budget.
+Both kinds of study matter. But when a question about AI capability comes up,
+the cost of just <i>running the experiment</i> has fallen roughly a
+thousand-fold. That changes who gets to find things out.</p>
+
+<footer>FinAgentBench · Agentic Sciences · All numbers generated
+programmatically from run logs; underlying market and text datasets are licensed,
+so this site publishes aggregates only. <a href="index.html">Full tables and
+caveats here</a>.</footer>
+</div></body></html>

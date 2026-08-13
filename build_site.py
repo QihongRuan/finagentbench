@@ -171,6 +171,8 @@ footer{margin-top:3em;color:var(--muted);font-size:.85rem;border-top:1px solid v
 <div class="hero-marker"></div>
 <div class="hero">
 <h1>FinAgentBench</h1>
+<p class="sub">📖 <a href="report.html">Read the plain-language report</a> — the
+story of these results for a general audience.</p>
 <p>Can LLM agents do quantitative finance research? Two capabilities, measured
 separately on private data: <b>execution</b> (replicate a result from a written method
 spec + raw data) and <b>judgment</b> (predict returns from financial text). 20+ frontier
