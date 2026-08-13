@@ -10,6 +10,7 @@ Data sources (all produced by the benchmark pipeline):
 Public-page rules: generic data-source naming (no vendor names), aggregates only.
 """
 import csv
+import re
 import html
 import pathlib
 from collections import defaultdict
@@ -136,28 +137,47 @@ def render():
     parts = []
     parts.append(
         """<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>FinAgentBench — Can LLM agents do finance research?</title>
 <style>
-:root{--fg:#1a1d23;--muted:#6b7280;--line:#e5e7eb;--acc:#0b6e4f;--bg:#fcfcfd}
-*{box-sizing:border-box}body{margin:0;font:16px/1.65 -apple-system,'Segoe UI',Roboto,sans-serif;color:var(--fg);background:var(--bg)}
-.wrap{max-width:980px;margin:0 auto;padding:48px 24px}
-h1{font-size:2rem;margin:.2em 0}h2{margin-top:2.2em;border-bottom:2px solid var(--line);padding-bottom:.3em}
-.sub{color:var(--muted);font-size:1.05rem}
-table{border-collapse:collapse;width:100%;margin:1em 0;font-size:.92rem}
-th{background:#f3f4f6;text-align:left}th,td{border:1px solid var(--line);padding:6px 10px}
-tr:nth-child(even) td{background:#fafafa}
-.note{background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px 16px;font-size:.9rem}
-.kpi{display:flex;gap:16px;flex-wrap:wrap;margin:1.2em 0}
-.kpi div{flex:1;min-width:180px;border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:#fff}
-.kpi b{display:block;font-size:1.5rem;color:var(--acc)}
-footer{margin-top:3em;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padding-top:1em}
-</style></head><body><div class="wrap">
+:root{--fg:#1a1a1a;--muted:#6b7280;--bg:#fff;--accent:#8c1515;--code:#f6f8fa;--border:#e5e7eb;--side:#fafafa}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;color:var(--fg);background:var(--bg);line-height:1.65;font-size:16.5px}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.layout{display:flex;max-width:1240px;margin:0 auto;align-items:flex-start}
+.sidebar{position:sticky;top:0;height:100vh;overflow-y:auto;width:280px;flex:0 0 280px;border-right:1px solid var(--border);background:var(--side);padding:24px 18px;font-size:14px}
+.sidebar h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:18px 0 8px;border:none;padding:0}
+.sidebar a{display:block;padding:5px 8px;border-radius:6px;color:#333}
+.sidebar a:hover{background:#efeae9;text-decoration:none}
+.sidebar a.sub{padding-left:22px;font-size:13px;color:#555}
+.sidebar a.ghside{margin-top:14px;border-top:1px solid var(--border);padding-top:14px;color:var(--accent);font-weight:600}
+.content{flex:1;min-width:0;padding:40px 48px;max-width:900px}
+.hero{padding:8px 0 24px;border-bottom:1px solid var(--border);margin-bottom:14px}
+.hero h1{font-size:36px;margin:0 0 10px}
+.hero p{font-size:17px;color:#374151;max-width:720px}
+.content h2{font-size:23px;margin:34px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border);scroll-margin-top:16px}
+.content h3{font-size:18.5px;margin:24px 0 8px;scroll-margin-top:16px}
+.content table{border-collapse:collapse;margin:16px 0;font-size:14px;display:block;overflow-x:auto}
+.content th,.content td{border:1px solid var(--border);padding:7px 11px;text-align:left}
+.content th{background:var(--code)}
+.content code{background:var(--code);padding:.15em .4em;border-radius:4px;font-size:.88em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.note{background:#faf7f7;border:1px solid #ecd9d9;border-radius:10px;padding:14px 18px;font-size:14.5px;color:#5a3a3a}
+.kpi{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin:22px 0}
+.kpi div{border:1px solid var(--border);border-radius:12px;padding:16px 18px;background:#fff;font-size:14px;color:#444}
+.kpi div:hover{box-shadow:0 4px 18px rgba(0,0,0,.07)}
+.kpi b{display:block;font-size:26px;color:var(--accent);margin-bottom:4px}
+footer{margin-top:3em;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);padding-top:1em}
+</style></head><body>
+<div class="hero-marker"></div>
+<div class="hero">
 <h1>FinAgentBench</h1>
-<p class="sub">Can LLM agents do quantitative finance research? Two capabilities, measured
+<p>Can LLM agents do quantitative finance research? Two capabilities, measured
 separately on private data: <b>execution</b> (replicate a result from a written method
-spec + raw data) and <b>judgment</b> (predict returns from financial text). All models
-run through one identical harness on a single inference platform.</p>"""
+spec + raw data) and <b>judgment</b> (predict returns from financial text). 20+ frontier
+models, one identical harness, one inference platform, script-graded.</p>
+<p><a href="https://github.com/QihongRuan/finagentbench">Source &amp; docs on GitHub →</a></p>
+</div>"""
+
     )
 
     # headline KPIs (dynamic)
@@ -410,8 +430,29 @@ caching (not metered in early runs) would reduce flagship agent costs somewhat.<
     )
 
     parts.append('<footer>FinAgentBench · Agentic Sciences research · <a href=\"https://github.com/QihongRuan/finagentbench\">source & docs on GitHub</a> · results generated programmatically from run logs; no numbers are hand-entered.</footer>')
-    parts.append("</div></body></html>")
-    OUT.write_text("\n".join(parts))
+    parts.append("</body></html>")
+    html_doc = "\n".join(parts)
+
+    # assign ids to h2/h3 and build the sidebar TOC
+    toc = []
+    def _id(m):
+        tag, title = m.group(1), m.group(2)
+        anchor = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")[:40]
+        toc.append((tag, anchor, re.sub(r"<[^>]+>", "", title)))
+        return f'<{tag} id="{anchor}">{title}</{tag}>'
+    body_start = html_doc.index('<div class="hero-marker"></div>')
+    head_part, body_part = html_doc[:body_start], html_doc[body_start:]
+    body_part = re.sub(r"<(h[23])>(.+?)</\1>", _id, body_part)
+    side = ['<nav class="sidebar"><h2>FinAgentBench</h2>']
+    for tag, anchor, title in toc:
+        cls = ' class="sub"' if tag == "h3" else ""
+        short = title if len(title) < 46 else title[:43] + "…"
+        side.append(f'<a href="#{anchor}"{cls}>{short}</a>')
+    side.append('<a class="ghside" href="https://github.com/QihongRuan/finagentbench">GitHub repo →</a></nav>')
+    body_part = body_part.replace('<div class="hero-marker"></div>',
+        '<div class="layout">' + "".join(side) + '<main class="content">', 1)
+    body_part = body_part.replace("</body></html>", "</main></div></body></html>")
+    OUT.write_text(head_part + body_part)
     print("wrote", OUT)
 
 

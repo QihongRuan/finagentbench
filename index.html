@@ -1,32 +1,50 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>FinAgentBench — Can LLM agents do finance research?</title>
 <style>
-:root{--fg:#1a1d23;--muted:#6b7280;--line:#e5e7eb;--acc:#0b6e4f;--bg:#fcfcfd}
-*{box-sizing:border-box}body{margin:0;font:16px/1.65 -apple-system,'Segoe UI',Roboto,sans-serif;color:var(--fg);background:var(--bg)}
-.wrap{max-width:980px;margin:0 auto;padding:48px 24px}
-h1{font-size:2rem;margin:.2em 0}h2{margin-top:2.2em;border-bottom:2px solid var(--line);padding-bottom:.3em}
-.sub{color:var(--muted);font-size:1.05rem}
-table{border-collapse:collapse;width:100%;margin:1em 0;font-size:.92rem}
-th{background:#f3f4f6;text-align:left}th,td{border:1px solid var(--line);padding:6px 10px}
-tr:nth-child(even) td{background:#fafafa}
-.note{background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px 16px;font-size:.9rem}
-.kpi{display:flex;gap:16px;flex-wrap:wrap;margin:1.2em 0}
-.kpi div{flex:1;min-width:180px;border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:#fff}
-.kpi b{display:block;font-size:1.5rem;color:var(--acc)}
-footer{margin-top:3em;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padding-top:1em}
-</style></head><body><div class="wrap">
+:root{--fg:#1a1a1a;--muted:#6b7280;--bg:#fff;--accent:#8c1515;--code:#f6f8fa;--border:#e5e7eb;--side:#fafafa}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;color:var(--fg);background:var(--bg);line-height:1.65;font-size:16.5px}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.layout{display:flex;max-width:1240px;margin:0 auto;align-items:flex-start}
+.sidebar{position:sticky;top:0;height:100vh;overflow-y:auto;width:280px;flex:0 0 280px;border-right:1px solid var(--border);background:var(--side);padding:24px 18px;font-size:14px}
+.sidebar h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:18px 0 8px;border:none;padding:0}
+.sidebar a{display:block;padding:5px 8px;border-radius:6px;color:#333}
+.sidebar a:hover{background:#efeae9;text-decoration:none}
+.sidebar a.sub{padding-left:22px;font-size:13px;color:#555}
+.sidebar a.ghside{margin-top:14px;border-top:1px solid var(--border);padding-top:14px;color:var(--accent);font-weight:600}
+.content{flex:1;min-width:0;padding:40px 48px;max-width:900px}
+.hero{padding:8px 0 24px;border-bottom:1px solid var(--border);margin-bottom:14px}
+.hero h1{font-size:36px;margin:0 0 10px}
+.hero p{font-size:17px;color:#374151;max-width:720px}
+.content h2{font-size:23px;margin:34px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border);scroll-margin-top:16px}
+.content h3{font-size:18.5px;margin:24px 0 8px;scroll-margin-top:16px}
+.content table{border-collapse:collapse;margin:16px 0;font-size:14px;display:block;overflow-x:auto}
+.content th,.content td{border:1px solid var(--border);padding:7px 11px;text-align:left}
+.content th{background:var(--code)}
+.content code{background:var(--code);padding:.15em .4em;border-radius:4px;font-size:.88em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.note{background:#faf7f7;border:1px solid #ecd9d9;border-radius:10px;padding:14px 18px;font-size:14.5px;color:#5a3a3a}
+.kpi{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin:22px 0}
+.kpi div{border:1px solid var(--border);border-radius:12px;padding:16px 18px;background:#fff;font-size:14px;color:#444}
+.kpi div:hover{box-shadow:0 4px 18px rgba(0,0,0,.07)}
+.kpi b{display:block;font-size:26px;color:var(--accent);margin-bottom:4px}
+footer{margin-top:3em;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);padding-top:1em}
+</style></head><body>
+<div class="layout"><nav class="sidebar"><h2>FinAgentBench</h2><a href="#key-findings">Key findings</a><a href="#methods-in-brief">Methods in brief</a><a href="#track-a-execution-replicate-from-spec">Track A — Execution: replicate from spec</a><a href="#t1-20-stock-momentum" class="sub">T1 · 20-stock momentum</a><a href="#t2-news-event-study" class="sub">T2 · News event study</a><a href="#t3-covered-call-option-backtest" class="sub">T3 · Covered-call option backtest</a><a href="#t4-full-market-momentum-11gb" class="sub">T4 · Full-market momentum (11GB)</a><a href="#t6-replicate-an-ml-asset-pricing-study-r" class="sub">T6 · Replicate an ML asset-pricing study (R…</a><a href="#track-b-judgment-predict-returns-from-te">Track B — Judgment: predict returns from text</a><a href="#b1-news-headlines" class="sub">B1 · News headlines</a><a href="#b2-analyst-articles-post-cutoff" class="sub">B2 · Analyst articles (post-cutoff)</a><a href="#b4-earnings-press-releases-post-cutoff" class="sub">B4 · Earnings press releases (post-cutoff)</a><a href="#b6-earnings-call-transcripts-post-cutoff" class="sub">B6 · Earnings-call transcripts (post-cutoff)</a><a href="#b5-13f-smart-money-adds-post-cutoff-smal" class="sub">B5 · 13F smart-money adds (post-cutoff, sma…</a><a href="#b3-sec-filing-md-a" class="sub">B3 · SEC filing MD&A</a><a href="#cost-optimal-routing">Cost-optimal routing</a><a href="#which-financial-text-carries-alpha">Which financial text carries alpha?</a><a href="#side-finding-ml-asset-pricing-alpha-afte">Side finding — ML asset-pricing alpha after…</a><a href="#honest-caveats">Honest caveats</a><a class="ghside" href="https://github.com/QihongRuan/finagentbench">GitHub repo →</a></nav><main class="content">
+<div class="hero">
 <h1>FinAgentBench</h1>
-<p class="sub">Can LLM agents do quantitative finance research? Two capabilities, measured
+<p>Can LLM agents do quantitative finance research? Two capabilities, measured
 separately on private data: <b>execution</b> (replicate a result from a written method
-spec + raw data) and <b>judgment</b> (predict returns from financial text). All models
-run through one identical harness on a single inference platform.</p>
+spec + raw data) and <b>judgment</b> (predict returns from financial text). 20+ frontier
+models, one identical harness, one inference platform, script-graded.</p>
+<p><a href="https://github.com/QihongRuan/finagentbench">Source &amp; docs on GitHub →</a></p>
+</div>
 <div class="kpi">
 <div><b>23</b>frontier models, one identical harness, 205 graded agent runs</div>
 <div><b>22/23</b>models replicate a momentum study perfectly from spec — execution is commoditized</div>
 <div><b>IC 0.59</b>best model reading post-cutoff analyst articles; withheld-text controls collapse to ≈0</div>
 </div>
-<h2>Key findings</h2><ol>
+<h2 id="key-findings">Key findings</h2><ol>
 <li><b>Execution is commoditized.</b> Given a precise method spec and raw data,
 nearly every model — including sub-cent-per-run ones — perfectly replicates
 standard quantitative studies (momentum portfolios, event studies, an
@@ -56,7 +74,7 @@ design on 2015–2021 (after the original out-of-sample period), decile
 long-short Sharpe falls from 2+ to ≈0.2–0.3 and linear signals flip negative;
 the nonlinear-beats-linear ranking survives.</li>
 </ol>
-<h2>Methods in brief</h2><ul>
+<h2 id="methods-in-brief">Methods in brief</h2><ul>
 <li><b>One harness, one platform.</b> Every model runs the same two-tool agent
 loop (bash sandbox + answer submission, step-capped) through one inference
 platform; provider-specific API quirks are normalized at the gateway layer and
@@ -72,9 +90,9 @@ per-model cutoff verification.</li>
 (up to 5 seeds); leaderboard metrics are being extended with multi-seed error
 bars.</li>
 </ul>
-<h2>Track A — Execution: replicate from spec</h2>
+<h2 id="track-a-execution-replicate-from-spec">Track A — Execution: replicate from spec</h2>
 <p>The agent gets a task sheet (method spelled out, results withheld), read-only data, a bash sandbox, and a 40-step budget. Grading is scripted: each submitted statistic vs ground truth (loose ±5% / strict ±1%). Samples are private extracts, so published numbers can't be recalled from training.</p>
-<h3>T1 · 20-stock momentum</h3>
+<h3 id="t1-20-stock-momentum">T1 · 20-stock momentum</h3>
 <table><tr><th>Model</th><th>Strict</th><th>Loose</th><th>Consistency (strict across seeds)</th><th>Best steps</th><th>Best cost</th></tr>
 <tr><td>Claude Haiku 4.5</td><td>1.0</td><td>1.0</td><td>—</td><td>6</td><td>$0.0668</td></tr>
 <tr><td>Claude Opus 4.8</td><td>1.0</td><td>1.0</td><td>—</td><td>2</td><td>$0.0615</td></tr>
@@ -100,7 +118,7 @@ bars.</li>
 <tr><td>Qwen3.8 Max</td><td>1.0</td><td>1.0</td><td>4/5</td><td>3</td><td>$0.0294</td></tr>
 <tr><td>Nemotron 3 Ultra</td><td>0.0</td><td>0.0</td><td>—</td><td>—</td><td>—</td></tr>
 </table>
-<h3>T2 · News event study</h3>
+<h3 id="t2-news-event-study">T2 · News event study</h3>
 <table><tr><th>Model</th><th>Strict</th><th>Loose</th><th>Consistency (strict across seeds)</th><th>Best steps</th><th>Best cost</th></tr>
 <tr><td>Claude Opus 5</td><td>1.0</td><td>1.0</td><td>5/5</td><td>2</td><td>$0.0607</td></tr>
 <tr><td>Claude Sonnet 5</td><td>1.0</td><td>1.0</td><td>5/5</td><td>1</td><td>$0.0180</td></tr>
@@ -116,7 +134,7 @@ bars.</li>
 <tr><td>MiMo V2.5</td><td>1.0</td><td>1.0</td><td>4/5</td><td>2</td><td>$0.0011</td></tr>
 <tr><td>Qwen3.8 Max</td><td>1.0</td><td>1.0</td><td>5/5</td><td>2</td><td>$0.0339</td></tr>
 </table>
-<h3>T3 · Covered-call option backtest</h3>
+<h3 id="t3-covered-call-option-backtest">T3 · Covered-call option backtest</h3>
 <table><tr><th>Model</th><th>Strict</th><th>Loose</th><th>Consistency (strict across seeds)</th><th>Best steps</th><th>Best cost</th></tr>
 <tr><td>Claude Opus 5</td><td>1.0</td><td>1.0</td><td>—</td><td>2</td><td>$0.1268</td></tr>
 <tr><td>Claude Sonnet 5</td><td>1.0</td><td>1.0</td><td>—</td><td>10</td><td>$0.2537</td></tr>
@@ -132,7 +150,7 @@ bars.</li>
 <tr><td>Qwen3.8 Max</td><td>1.0</td><td>1.0</td><td>—</td><td>13</td><td>$0.3382</td></tr>
 <tr><td>GPT-5.6 Sol</td><td>0.6</td><td>0.7</td><td>—</td><td>2</td><td>$0.0718</td></tr>
 </table>
-<h3>T4 · Full-market momentum (11GB)</h3>
+<h3 id="t4-full-market-momentum-11gb">T4 · Full-market momentum (11GB)</h3>
 <table><tr><th>Model</th><th>Strict</th><th>Loose</th><th>Consistency (strict across seeds)</th><th>Best steps</th><th>Best cost</th></tr>
 <tr><td>Claude Opus 5</td><td>1.0</td><td>1.0</td><td>—</td><td>5</td><td>$0.1968</td></tr>
 <tr><td>Claude Sonnet 5</td><td>1.0</td><td>1.0</td><td>—</td><td>11</td><td>$0.2056</td></tr>
@@ -148,7 +166,7 @@ bars.</li>
 <tr><td>Gemini 3.1 Pro</td><td>0.4</td><td>1.0</td><td>—</td><td>30</td><td>$1.0432</td></tr>
 <tr><td>DeepSeek V4 Flash</td><td>0.2</td><td>0.4</td><td>—</td><td>20</td><td>$0.0372</td></tr>
 </table>
-<h3>T6 · Replicate an ML asset-pricing study (RFS-style, 4 models trained)</h3>
+<h3 id="t6-replicate-an-ml-asset-pricing-study-r">T6 · Replicate an ML asset-pricing study (RFS-style, 4 models trained)</h3>
 <table><tr><th>Model</th><th>Strict</th><th>Loose</th><th>Consistency (strict across seeds)</th><th>Best steps</th><th>Best cost</th></tr>
 <tr><td>Claude Opus 5</td><td>1.0</td><td>1.0</td><td>1/3</td><td>7</td><td>$0.5712</td></tr>
 <tr><td>Claude Sonnet 5</td><td>1.0</td><td>1.0</td><td>3/3</td><td>5</td><td>$0.1292</td></tr>
@@ -164,8 +182,8 @@ bars.</li>
 <tr><td>GPT-5.4</td><td>0.1</td><td>0.2</td><td>0/3</td><td>5</td><td>$0.1480</td></tr>
 <tr><td>Gemma 4 31B</td><td>0.0</td><td>0.4</td><td>0/3</td><td>9</td><td>$0.0139</td></tr>
 </table>
-<h2>Track B — Judgment: predict returns from text</h2>
-<h3>B1 · News headlines</h3><p>1,008 stratified news events on 20 mega-caps (2004–2024) from an institutional news-event dataset. Model sees headline + ticker + date + trailing stats; predicts 5-day beta-adjusted return. Control: headline withheld (memorization baseline).</p>
+<h2 id="track-b-judgment-predict-returns-from-te">Track B — Judgment: predict returns from text</h2>
+<h3 id="b1-news-headlines">B1 · News headlines</h3><p>1,008 stratified news events on 20 mega-caps (2004–2024) from an institutional news-event dataset. Model sees headline + ticker + date + trailing stats; predicts 5-day beta-adjusted return. Control: headline withheld (memorization baseline).</p>
 <table><tr><th>Model</th><th>n</th><th>Hit rate</th><th>Spearman IC</th><th>L/S spread (bps)</th><th>Control IC</th><th>ΔIC (text − control)</th></tr>
 <tr><td>Claude Opus 5</td><td>1008</td><td>0.6713</td><td>0.522</td><td>973.7</td><td>0.5326</td><td>-0.0106</td></tr>
 <tr><td>Kimi K3</td><td>971</td><td>0.5637</td><td>0.2413</td><td>593.1</td><td>0.2157</td><td>0.0256</td></tr>
@@ -181,7 +199,7 @@ bars.</li>
 <tr><td>Gemma 4 31B</td><td>1008</td><td>0.5154</td><td>0.0377</td><td>43.6</td><td>0.0362</td><td>0.0015</td></tr>
 <tr><td>MiMo V2.5</td><td>1006</td><td>0.5082</td><td>0.0145</td><td>77.6</td><td>0.0324</td><td>-0.0179</td></tr>
 </table>
-<h3>B2 · Analyst articles (post-cutoff)</h3><p>Full-text investment research articles published Apr–Aug 2026 — after the training cutoff of the models under test. Model predicts 20-day market-adjusted return. Control: article withheld.</p>
+<h3 id="b2-analyst-articles-post-cutoff">B2 · Analyst articles (post-cutoff)</h3><p>Full-text investment research articles published Apr–Aug 2026 — after the training cutoff of the models under test. Model predicts 20-day market-adjusted return. Control: article withheld.</p>
 <table><tr><th>Model</th><th>n</th><th>Hit rate</th><th>Spearman IC</th><th>IC (Jun–Jul only)</th><th>Cutoff</th><th>L/S spread (bps)</th><th>Control IC</th></tr>
 <tr><td>Claude Opus 5</td><td>297</td><td>0.5118</td><td>0.5903</td><td>0.6271</td><td>2026-05 ⚠️</td><td>4447.3</td><td>-0.0261</td></tr>
 <tr><td>GPT-5.5</td><td>292</td><td>0.476</td><td>0.4678</td><td>0.562</td><td>UNDISCLOSED ⚠️</td><td>2759.0</td><td>0.0376</td></tr>
@@ -216,7 +234,7 @@ bars.</li>
 <tr><td>Nemotron 3 Ultra</td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><td>zai-org_GLM-5.2-FP8.seed1</td><td>75</td><td>0.5333</td><td>-0.0565</td><td></td><td>UNDISCLOSED ⚠️</td><td>-10.0</td><td></td></tr>
 </table>
-<h3>B4 · Earnings press releases (post-cutoff)</h3><p>8-K item-2.02 earnings press releases filed with the SEC Feb–Jul 2026 (after most models' training cutoffs), fetched from EDGAR. Model reads the release and predicts the 5-day post-filing market-adjusted return. Control: text withheld.</p>
+<h3 id="b4-earnings-press-releases-post-cutoff">B4 · Earnings press releases (post-cutoff)</h3><p>8-K item-2.02 earnings press releases filed with the SEC Feb–Jul 2026 (after most models' training cutoffs), fetched from EDGAR. Model reads the release and predicts the 5-day post-filing market-adjusted return. Control: text withheld.</p>
 <table><tr><th>Model</th><th>n</th><th>Hit rate</th><th>Spearman IC</th><th>L/S spread (bps)</th><th>Control IC</th></tr>
 <tr><td>Claude Opus 5</td><td>100</td><td>0.52</td><td>0.0787</td><td>-197.2</td><td>0.2066</td></tr>
 <tr><td>Claude Sonnet 5</td><td>96</td><td>0.5495</td><td>0.0658</td><td>116.1</td><td>0.0407</td></tr>
@@ -232,12 +250,12 @@ bars.</li>
 <tr><td>DeepSeek V4 Flash</td><td>96</td><td>0.46</td><td>-0.1566</td><td>-691.3</td><td>0.053</td></tr>
 <tr><td>Gemma 4 31B</td><td>100</td><td>0.3913</td><td>-0.1916</td><td>-1049.5</td><td>-0.1419</td></tr>
 </table>
-<h3>B6 · Earnings-call transcripts (post-cutoff)</h3><p>Full earnings-call transcripts (Feb–Jul 2026). Model reads management remarks + Q&A and predicts the 5-day post-call market-adjusted return. Control: transcript withheld.</p>
+<h3 id="b6-earnings-call-transcripts-post-cutoff">B6 · Earnings-call transcripts (post-cutoff)</h3><p>Full earnings-call transcripts (Feb–Jul 2026). Model reads management remarks + Q&A and predicts the 5-day post-call market-adjusted return. Control: transcript withheld.</p>
 <table><tr><th>Model</th><th>n</th><th>Hit rate</th><th>Spearman IC</th><th>L/S spread (bps)</th><th>Control IC</th></tr>
 <tr><td>MiMo V2.5</td><td>0</td><td></td><td></td><td></td><td></td></tr>
 <tr><td>DeepSeek V4 Flash</td><td>6</td><td>0.1667</td><td>-0.3531</td><td></td><td>-0.3928</td></tr>
 </table>
-<h3>B5 · 13F smart-money adds (post-cutoff, small n)</h3><p>Top new/increased positions from Q1-2026 13F filings of 11 prominent funds (filed mid-May 2026). Model sees who bought, size, and portfolio weight; predicts the 20-day post-filing market-adjusted return. Control: same stock/date without the 13F context. n≈38 — indicative only.</p>
+<h3 id="b5-13f-smart-money-adds-post-cutoff-smal">B5 · 13F smart-money adds (post-cutoff, small n)</h3><p>Top new/increased positions from Q1-2026 13F filings of 11 prominent funds (filed mid-May 2026). Model sees who bought, size, and portfolio weight; predicts the 20-day post-filing market-adjusted return. Control: same stock/date without the 13F context. n≈38 — indicative only.</p>
 <table><tr><th>Model</th><th>n</th><th>Hit rate</th><th>Spearman IC</th><th>L/S spread (bps)</th><th>Control IC</th></tr>
 <tr><td>GPT-5.4</td><td>38</td><td>0.6053</td><td>0.5802</td><td>2012.7</td><td>0.1344</td></tr>
 <tr><td>DeepSeek V4 Pro</td><td>20</td><td>0.5882</td><td>0.5457</td><td>2321.5</td><td>0.0552</td></tr>
@@ -253,7 +271,7 @@ bars.</li>
 <tr><td>Claude Sonnet 5</td><td>36</td><td>0.5625</td><td>0.0431</td><td>999.5</td><td>-0.2808</td></tr>
 <tr><td>MiMo V2.5</td><td>38</td><td>0.6053</td><td>-0.1569</td><td>-835.4</td><td>-0.0061</td></tr>
 </table>
-<h3>B3 · SEC filing MD&A</h3><p>Management's Discussion & Analysis sections from 10-K/20-F filings of 33 AI-infrastructure companies (2017–2024); predict 20-day post-filing market-adjusted drift. Control: text withheld.</p>
+<h3 id="b3-sec-filing-md-a">B3 · SEC filing MD&A</h3><p>Management's Discussion & Analysis sections from 10-K/20-F filings of 33 AI-infrastructure companies (2017–2024); predict 20-day post-filing market-adjusted drift. Control: text withheld.</p>
 <table><tr><th>Model</th><th>n</th><th>Hit rate</th><th>Spearman IC</th><th>L/S spread (bps)</th><th>Control IC</th></tr>
 <tr><td>Claude Opus 5</td><td>204</td><td>0.6897</td><td>0.5466</td><td>2007.4</td><td>0.4427</td></tr>
 <tr><td>DeepSeek V4 Pro</td><td>53</td><td>0.6154</td><td>0.5358</td><td>2220.7</td><td>-0.1678</td></tr>
@@ -272,7 +290,7 @@ bars.</li>
 <tr><td>MiMo V2.5</td><td>203</td><td>0.4455</td><td>-0.0428</td><td>-195.2</td><td>0.0551</td></tr>
 <tr><td>XiaomiMiMo_MiMo-V2.5.seed1</td><td>203</td><td>0.4307</td><td>-0.0564</td><td>-270.2</td><td></td></tr>
 </table>
-<h2>Cost-optimal routing</h2><p>Because every model runs the same tasks in the same harness, the results double as a routing table: the cheapest model that solves each difficulty tier perfectly. Routine replication does not need a flagship.</p>
+<h2 id="cost-optimal-routing">Cost-optimal routing</h2><p>Because every model runs the same tasks in the same harness, the results double as a routing table: the cheapest model that solves each difficulty tier perfectly. Routine replication does not need a flagship.</p>
 <table><tr><th>Task tier</th><th>Cheapest perfect solver</th><th>Cost per run</th></tr>
 <tr><td>T1 · 20-stock momentum</td><td>Gemma 4 31B</td><td>$0.0010</td></tr>
 <tr><td>T2 · News event study</td><td>Gemma 4 31B</td><td>$0.0008</td></tr>
@@ -280,15 +298,15 @@ bars.</li>
 <tr><td>T4 · Full-market momentum (11GB)</td><td>Gemma 4 31B</td><td>$0.0054</td></tr>
 <tr><td>T6 · Replicate an ML asset-pricing study (RFS-style, 4 models trained)</td><td>MiMo V2.5</td><td>$0.0271</td></tr>
 </table>
-<h2>Which financial text carries alpha?</h2><p>The same models, the same harness, four post-cutoff text sources — very different outcomes. <b>Analyst opinion articles</b> (B2) support strong cross-sectional ranking (best models IC ≈ 0.4–0.6): opinions diffuse slowly. <b>Earnings press releases</b> (B4) show near-zero or negative IC for most models: hard numbers are priced within minutes, so reading them the next day adds nothing — models that naively map "good quarter → buy" get systematically caught by post-announcement reversals. <b>13F disclosures</b> (B5) show positive signal on a small sample. The lesson: text selection dominates model choice.</p>
-<h2>Side finding — ML asset-pricing alpha after publication</h2><p>Building T6's ground truth required re-running a scoped version of a canonical machine-learning asset-pricing study (94 firm characteristics, expanding-window refits) on 2015–2021 — entirely after the original paper's out-of-sample period. The equal-weighted decile long-short portfolios that earned Sharpe ratios above 2 in the original sample largely vanish:</p>
+<h2 id="which-financial-text-carries-alpha">Which financial text carries alpha?</h2><p>The same models, the same harness, four post-cutoff text sources — very different outcomes. <b>Analyst opinion articles</b> (B2) support strong cross-sectional ranking (best models IC ≈ 0.4–0.6): opinions diffuse slowly. <b>Earnings press releases</b> (B4) show near-zero or negative IC for most models: hard numbers are priced within minutes, so reading them the next day adds nothing — models that naively map "good quarter → buy" get systematically caught by post-announcement reversals. <b>13F disclosures</b> (B5) show positive signal on a small sample. The lesson: text selection dominates model choice.</p>
+<h2 id="side-finding-ml-asset-pricing-alpha-afte">Side finding — ML asset-pricing alpha after publication</h2><p>Building T6's ground truth required re-running a scoped version of a canonical machine-learning asset-pricing study (94 firm characteristics, expanding-window refits) on 2015–2021 — entirely after the original paper's out-of-sample period. The equal-weighted decile long-short portfolios that earned Sharpe ratios above 2 in the original sample largely vanish:</p>
 <table><tr><th>Model</th><th>OOS R² (%)</th><th>Decile L/S Sharpe 2015–2021</th></tr>
 <tr><td>OLS-3 (size/value/momentum)</td><td>0.267</td><td>-0.101</td></tr>
 <tr><td>Elastic net</td><td>0.197</td><td>-0.312</td></tr>
 <tr><td>Gradient-boosted trees</td><td>0.102</td><td>0.196</td></tr>
 <tr><td>Neural net (3 layers)</td><td>-0.175</td><td>0.320</td></tr>
 </table><p>Nonlinear models still beat linear ones — the paper's qualitative ranking survives — but linear signals flip negative and the economic magnitude is a fraction of the published era. (Scope deviations: characteristics only, equal-weighted deciles, training history starts 2004.)</p>
-<h2>Honest caveats</h2><div class="note"><ul>
+<h2 id="honest-caveats">Honest caveats</h2><div class="note"><ul>
 <li>Track B2's "post-cutoff" claim is per-model: models released mid-2026 may have
 training data extending into the article window; a per-model cutoff table is in
 progress. Withheld-text controls bound the contamination for every track.</li>
@@ -305,4 +323,4 @@ other, not to vendor-reported benchmarks.</li>
 <li>Costs are computed at full input-token list price; provider-side prefix
 caching (not metered in early runs) would reduce flagship agent costs somewhat.</li></ul></div>
 <footer>FinAgentBench · Agentic Sciences research · <a href="https://github.com/QihongRuan/finagentbench">source & docs on GitHub</a> · results generated programmatically from run logs; no numbers are hand-entered.</footer>
-</div></body></html>
+</main></div></body></html>
