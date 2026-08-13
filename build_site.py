@@ -317,6 +317,14 @@ bars.</li>
             "only.",
         ),
         (
+            "b7",
+            "B7 · FOMC statements & minutes (macro)",
+            "42 Federal Reserve releases (2024-01..2026-07, 8 post-cutoff). Model "
+            "reads the release and predicts SPY's close-to-close move over the next "
+            "5 trading days (TLT also collected). Control: text withheld — the model "
+            "knows only that a Fed release happened that day.",
+        ),
+        (
             "b3",
             "B3 · SEC filing MD&A",
             "Management's Discussion & Analysis sections from 10-K/20-F filings of "
