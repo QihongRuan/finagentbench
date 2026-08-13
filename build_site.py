@@ -32,6 +32,19 @@ MODEL_LABELS = {
     "openai/gpt-5.4": "GPT-5.4",
     "openai/gpt-5.6-sol": "GPT-5.6 Sol",
     "google/gemini-3.1-pro-preview": "Gemini 3.1 Pro",
+    "openai/gpt-5.6-terra": "GPT-5.6 Terra",
+    "openai/gpt-5.5": "GPT-5.5",
+    "google/gemini-3.6-flash": "Gemini 3.6 Flash",
+    "MiniMaxAI/MiniMax-M3": "MiniMax M3",
+    "nvidia/nemotron-3-ultra-550b-a55b": "Nemotron 3 Ultra",
+    "tencent/Hy3": "Hunyuan 3",
+    "moonshotai/Kimi-K2.6": "Kimi K2.6",
+    "deepseek-ai/DeepSeek-V3.2": "DeepSeek V3.2",
+    "anthropic/claude-opus-4.8": "Claude Opus 4.8",
+    "anthropic/claude-opus-4.7": "Claude Opus 4.7",
+    "anthropic/claude-opus-4.6": "Claude Opus 4.6",
+    "anthropic/claude-opus-4.5": "Claude Opus 4.5",
+    "anthropic/claude-haiku-4.5": "Claude Haiku 4.5",
 }
 TASK_LABELS = {
     "t1_momentum": "T1 · 20-stock momentum",
@@ -209,6 +222,30 @@ run through one identical harness on a single inference platform.</p>"""
             "market-adjusted return. Control: article withheld.",
         ),
         (
+            "b4",
+            "B4 · Earnings press releases (post-cutoff)",
+            "8-K item-2.02 earnings press releases filed with the SEC Feb–Jul 2026 "
+            "(after most models' training cutoffs), fetched from EDGAR. Model reads "
+            "the release and predicts the 5-day post-filing market-adjusted return. "
+            "Control: text withheld.",
+        ),
+        (
+            "b6",
+            "B6 · Earnings-call transcripts (post-cutoff)",
+            "Full earnings-call transcripts (Feb–Jul 2026). Model reads management "
+            "remarks + Q&A and predicts the 5-day post-call market-adjusted return. "
+            "Control: transcript withheld.",
+        ),
+        (
+            "b5",
+            "B5 · 13F smart-money adds (post-cutoff, small n)",
+            "Top new/increased positions from Q1-2026 13F filings of 11 prominent "
+            "funds (filed mid-May 2026). Model sees who bought, size, and portfolio "
+            "weight; predicts the 20-day post-filing market-adjusted return. "
+            "Control: same stock/date without the 13F context. n≈38 — indicative "
+            "only.",
+        ),
+        (
             "b3",
             "B3 · SEC filing MD&A",
             "Management's Discussion & Analysis sections from 10-K/20-F filings of "
@@ -242,6 +279,39 @@ run through one identical harness on a single inference platform.</p>"""
             row += "</tr>"
             parts.append(row)
         parts.append("</table>")
+
+    # cost-optimal routing table derived from Track A results
+    parts.append(
+        "<h2>Cost-optimal routing</h2>"
+        "<p>Because every model runs the same tasks in the same harness, the results "
+        "double as a routing table: the cheapest model that solves each difficulty "
+        "tier perfectly. Routine replication does not need a flagship.</p>"
+    )
+    routing = []
+    for task in ["t1_momentum", "t2_event_study", "t3_covered_call", "t4_crsp_momentum", "t6_gkx_ml"]:
+        rows = [r for r in track_a_table(agg, task) if r["strict"] == 1.0 and r["cost"] != "—"]
+        if rows:
+            best = min(rows, key=lambda r: float(r["cost"].lstrip("$")))
+            routing.append((TASK_LABELS[task], best["model"], best["cost"]))
+    if routing:
+        parts.append("<table><tr><th>Task tier</th><th>Cheapest perfect solver</th><th>Cost per run</th></tr>")
+        for t, m, c in routing:
+            parts.append("<tr>" + td(t) + td(m) + td(c) + "</tr>")
+        parts.append("</table>")
+
+    # which-text-has-alpha contrast
+    parts.append(
+        "<h2>Which financial text carries alpha?</h2>"
+        "<p>The same models, the same harness, four post-cutoff text sources — "
+        "very different outcomes. <b>Analyst opinion articles</b> (B2) support "
+        "strong cross-sectional ranking (best models IC ≈ 0.4–0.6): opinions "
+        "diffuse slowly. <b>Earnings press releases</b> (B4) show near-zero or "
+        "negative IC for most models: hard numbers are priced within minutes, so "
+        "reading them the next day adds nothing — models that naively map \"good "
+        "quarter → buy\" get systematically caught by post-announcement reversals. "
+        "<b>13F disclosures</b> (B5) show positive signal on a small sample. "
+        "The lesson: text selection dominates model choice.</p>"
+    )
 
     # GKX post-publication decay (from the t6 reference run)
     gkx_p = ROOT.parent / "gkx" / "ground_truth_t6.json"
@@ -279,7 +349,13 @@ correlation inflates naive significance; treat Track B as a <i>ranking</i> acros
 models on a common sample, not a tradable alpha estimate.</li>
 <li>Small samples where noted (B2 n<500); error bars matter and seeds are being added.</li>
 <li>Underlying market and text datasets are licensed; this page publishes
-aggregates only.</li></ul></div>"""
+aggregates only.</li>
+<li>Scores are harness-dependent: the same model can score differently under a
+different runtime (a point model vendors themselves acknowledge). All numbers
+here come from ONE neutral harness on one serving platform — comparable to each
+other, not to vendor-reported benchmarks.</li>
+<li>Costs are computed at full input-token list price; provider-side prefix
+caching (not metered in early runs) would reduce flagship agent costs somewhat.</li></ul></div>"""
     )
 
     parts.append(
