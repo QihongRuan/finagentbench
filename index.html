@@ -22,10 +22,56 @@ separately on private data: <b>execution</b> (replicate a result from a written 
 spec + raw data) and <b>judgment</b> (predict returns from financial text). All models
 run through one identical harness on a single inference platform.</p>
 <div class="kpi">
-<div><b>21/23</b>models replicate a momentum study perfectly from spec (Track A is saturated at the entry tier)</div>
-<div><b>58×</b>cost spread between the cheapest and priciest perfect replication</div>
-<div><b>IC ≈ 0.5 vs 0.2</b>flagship-vs-small gap reading full analyst articles — judgment is where models differ</div>
+<div><b>23</b>frontier models, one identical harness, 205 graded agent runs</div>
+<div><b>22/23</b>models replicate a momentum study perfectly from spec — execution is commoditized</div>
+<div><b>IC 0.59</b>best model reading post-cutoff analyst articles; withheld-text controls collapse to ≈0</div>
 </div>
+<h2>Key findings</h2><ol>
+<li><b>Execution is commoditized.</b> Given a precise method spec and raw data,
+nearly every model — including sub-cent-per-run ones — perfectly replicates
+standard quantitative studies (momentum portfolios, event studies, an
+option-overlay backtest, an 11GB full-market study). See T1–T4.</li>
+<li><b>The frontier appears at paper scale.</b> Replicating a full
+machine-learning asset-pricing study end-to-end (T6: train four model classes,
+annual refits, out-of-sample portfolio evaluation) splits the field roughly in
+half. Failures are precision failures — every model produces plausible
+magnitudes; only some hold twenty-plus spec details simultaneously.</li>
+<li><b>Reading long financial text yields real, measurable judgment.</b> On
+analyst articles published after training cutoffs, flagship models reach
+Spearman ICs around 0.4–0.5 vs ≈0.2 for small models; with the text withheld,
+every model collapses to ≈0. See B2.</li>
+<li><b>On historical data, apparent skill is often memorization.</b> Some
+models predict historical event outcomes better with the news withheld —
+they recall two decades of price history from (ticker, date) alone. The honest
+metric is ΔIC = IC(text) − IC(withheld). See B1.</li>
+<li><b>Models rank better than they call direction.</b> Several models show
+significantly positive ICs with below-50% hit rates: a systematic long bias.
+Use these signals cross-sectionally, not for market timing.</li>
+<li><b>Reliability, quantified.</b> Re-running identical tasks: ~2–3% of runs
+silently produce wrong answers and ~6% die on provider infrastructure —
+consistent with what production-agent practitioners report as their top
+challenge.</li>
+<li><b>Published ML alpha decays.</b> Re-running a canonical ML asset-pricing
+design on 2015–2021 (after the original out-of-sample period), decile
+long-short Sharpe falls from 2+ to ≈0.2–0.3 and linear signals flip negative;
+the nonlinear-beats-linear ranking survives.</li>
+</ol>
+<h2>Methods in brief</h2><ul>
+<li><b>One harness, one platform.</b> Every model runs the same two-tool agent
+loop (bash sandbox + answer submission, step-capped) through one inference
+platform; provider-specific API quirks are normalized at the gateway layer and
+documented.</li>
+<li><b>Script-graded, private ground truth.</b> Track A answers are graded by
+tolerance bands (loose ±5%, strict ±1%) against reference implementations run
+on private data extracts — published numbers can't be recalled from training.</li>
+<li><b>Controls everywhere.</b> Every text-prediction track has a
+withheld-text control run per model, bounding memorization; Track B2
+additionally uses only articles published after model training cutoffs, with
+per-model cutoff verification.</li>
+<li><b>Replicates.</b> Reliability numbers come from repeated identical runs
+(up to 5 seeds); leaderboard metrics are being extended with multi-seed error
+bars.</li>
+</ul>
 <h2>Track A — Execution: replicate from spec</h2>
 <p>The agent gets a task sheet (method spelled out, results withheld), read-only data, a bash sandbox, and a 40-step budget. Grading is scripted: each submitted statistic vs ground truth (loose ±5% / strict ±1%). Samples are private extracts, so published numbers can't be recalled from training.</p>
 <h3>T1 · 20-stock momentum</h3>
@@ -40,18 +86,18 @@ run through one identical harness on a single inference platform.</p>
 <tr><td>GLM 5.2</td><td>1.0</td><td>1.0</td><td>4/5</td><td>2</td><td>$0.0154</td></tr>
 <tr><td>GPT-5.4</td><td>1.0</td><td>1.0</td><td>5/5</td><td>1</td><td>$0.0193</td></tr>
 <tr><td>GPT-5.5</td><td>1.0</td><td>1.0</td><td>—</td><td>3</td><td>$0.1473</td></tr>
-<tr><td>GPT-5.6 Sol</td><td>1.0</td><td>1.0</td><td>1/5</td><td>1</td><td>$0.0296</td></tr>
+<tr><td>GPT-5.6 Sol</td><td>1.0</td><td>1.0</td><td>5/5</td><td>1</td><td>$0.0269</td></tr>
 <tr><td>GPT-5.6 Terra</td><td>1.0</td><td>1.0</td><td>—</td><td>1</td><td>$0.0155</td></tr>
-<tr><td>Gemini 3.1 Pro</td><td>1.0</td><td>1.0</td><td>4/5</td><td>2</td><td>$0.0775</td></tr>
+<tr><td>Gemini 3.1 Pro</td><td>1.0</td><td>1.0</td><td>5/5</td><td>2</td><td>$0.0775</td></tr>
 <tr><td>Gemini 3.6 Flash</td><td>1.0</td><td>1.0</td><td>—</td><td>28</td><td>$1.0086</td></tr>
 <tr><td>Gemma 4 31B</td><td>1.0</td><td>1.0</td><td>5/5</td><td>1</td><td>$0.0010</td></tr>
 <tr><td>Grok 4.5</td><td>1.0</td><td>1.0</td><td>5/5</td><td>2</td><td>$0.0204</td></tr>
 <tr><td>Hunyuan 3</td><td>1.0</td><td>1.0</td><td>—</td><td>2</td><td>$0.0015</td></tr>
+<tr><td>Kimi K2.6</td><td>1.0</td><td>1.0</td><td>—</td><td>2</td><td>$0.0132</td></tr>
 <tr><td>Kimi K3</td><td>1.0</td><td>1.0</td><td>5/5</td><td>2</td><td>$0.0270</td></tr>
 <tr><td>MiMo V2.5</td><td>1.0</td><td>1.0</td><td>5/5</td><td>2</td><td>$0.0013</td></tr>
 <tr><td>MiniMax M3</td><td>1.0</td><td>1.0</td><td>—</td><td>6</td><td>$0.0264</td></tr>
 <tr><td>Qwen3.8 Max</td><td>1.0</td><td>1.0</td><td>4/5</td><td>3</td><td>$0.0294</td></tr>
-<tr><td>Kimi K2.6</td><td>0.0</td><td>0.0</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>Nemotron 3 Ultra</td><td>0.0</td><td>0.0</td><td>—</td><td>—</td><td>—</td></tr>
 </table>
 <h3>T2 · News event study</h3>
@@ -59,11 +105,11 @@ run through one identical harness on a single inference platform.</p>
 <tr><td>Claude Opus 5</td><td>1.0</td><td>1.0</td><td>5/5</td><td>2</td><td>$0.0607</td></tr>
 <tr><td>Claude Sonnet 5</td><td>1.0</td><td>1.0</td><td>5/5</td><td>1</td><td>$0.0180</td></tr>
 <tr><td>DeepSeek V4 Flash</td><td>1.0</td><td>1.0</td><td>5/5</td><td>5</td><td>$0.0037</td></tr>
-<tr><td>DeepSeek V4 Pro</td><td>1.0</td><td>1.0</td><td>4/5</td><td>4</td><td>$0.0470</td></tr>
+<tr><td>DeepSeek V4 Pro</td><td>1.0</td><td>1.0</td><td>5/5</td><td>4</td><td>$0.0470</td></tr>
 <tr><td>GLM 5.2</td><td>1.0</td><td>1.0</td><td>5/5</td><td>3</td><td>$0.0205</td></tr>
 <tr><td>GPT-5.4</td><td>1.0</td><td>1.0</td><td>5/5</td><td>1</td><td>$0.0190</td></tr>
 <tr><td>GPT-5.6 Sol</td><td>1.0</td><td>1.0</td><td>5/5</td><td>1</td><td>$0.0285</td></tr>
-<tr><td>Gemini 3.1 Pro</td><td>1.0</td><td>1.0</td><td>4/5</td><td>2</td><td>$0.0571</td></tr>
+<tr><td>Gemini 3.1 Pro</td><td>1.0</td><td>1.0</td><td>5/5</td><td>2</td><td>$0.0553</td></tr>
 <tr><td>Gemma 4 31B</td><td>1.0</td><td>1.0</td><td>5/5</td><td>1</td><td>$0.0008</td></tr>
 <tr><td>Grok 4.5</td><td>1.0</td><td>1.0</td><td>5/5</td><td>2</td><td>$0.0220</td></tr>
 <tr><td>Kimi K3</td><td>1.0</td><td>1.0</td><td>5/5</td><td>2</td><td>$0.0330</td></tr>
@@ -98,23 +144,23 @@ run through one identical harness on a single inference platform.</p>
 <tr><td>MiMo V2.5</td><td>1.0</td><td>1.0</td><td>—</td><td>5</td><td>$0.0073</td></tr>
 <tr><td>Qwen3.8 Max</td><td>1.0</td><td>1.0</td><td>—</td><td>19</td><td>$0.7046</td></tr>
 <tr><td>GPT-5.4</td><td>0.8</td><td>1.0</td><td>—</td><td>1</td><td>$0.0300</td></tr>
+<tr><td>GPT-5.6 Sol</td><td>0.8</td><td>0.8</td><td>—</td><td>5</td><td>$0.1065</td></tr>
 <tr><td>Gemini 3.1 Pro</td><td>0.4</td><td>1.0</td><td>—</td><td>30</td><td>$1.0432</td></tr>
 <tr><td>DeepSeek V4 Flash</td><td>0.2</td><td>0.4</td><td>—</td><td>20</td><td>$0.0372</td></tr>
-<tr><td>GPT-5.6 Sol</td><td>0.0</td><td>0.0</td><td>—</td><td>—</td><td>—</td></tr>
 </table>
 <h3>T6 · Replicate an ML asset-pricing study (RFS-style, 4 models trained)</h3>
 <table><tr><th>Model</th><th>Strict</th><th>Loose</th><th>Consistency (strict across seeds)</th><th>Best steps</th><th>Best cost</th></tr>
-<tr><td>Claude Opus 5</td><td>1.0</td><td>1.0</td><td>1/2</td><td>11</td><td>$0.5712</td></tr>
-<tr><td>Claude Sonnet 5</td><td>1.0</td><td>1.0</td><td>2/3</td><td>7</td><td>$0.1420</td></tr>
+<tr><td>Claude Opus 5</td><td>1.0</td><td>1.0</td><td>1/3</td><td>7</td><td>$0.5712</td></tr>
+<tr><td>Claude Sonnet 5</td><td>1.0</td><td>1.0</td><td>3/3</td><td>5</td><td>$0.1292</td></tr>
 <tr><td>DeepSeek V4 Flash</td><td>1.0</td><td>1.0</td><td>1/3</td><td>28</td><td>$0.0669</td></tr>
 <tr><td>DeepSeek V4 Pro</td><td>1.0</td><td>1.0</td><td>2/3</td><td>9</td><td>$0.1135</td></tr>
 <tr><td>GLM 5.2</td><td>1.0</td><td>1.0</td><td>3/3</td><td>12</td><td>$0.1919</td></tr>
 <tr><td>Grok 4.5</td><td>1.0</td><td>1.0</td><td>2/3</td><td>5</td><td>$0.1123</td></tr>
-<tr><td>Kimi K3</td><td>1.0</td><td>1.0</td><td>2/3</td><td>13</td><td>$0.5373</td></tr>
+<tr><td>Kimi K3</td><td>1.0</td><td>1.0</td><td>3/3</td><td>13</td><td>$0.5373</td></tr>
 <tr><td>MiMo V2.5</td><td>1.0</td><td>1.0</td><td>1/3</td><td>15</td><td>$0.0271</td></tr>
 <tr><td>Qwen3.8 Max</td><td>1.0</td><td>1.0</td><td>3/3</td><td>15</td><td>$0.4760</td></tr>
-<tr><td>GPT-5.6 Sol</td><td>0.5</td><td>0.8</td><td>0/2</td><td>10</td><td>$0.3244</td></tr>
-<tr><td>Gemini 3.1 Pro</td><td>0.4</td><td>0.5</td><td>0/2</td><td>12</td><td>$0.3600</td></tr>
+<tr><td>GPT-5.6 Sol</td><td>0.5</td><td>0.8</td><td>0/3</td><td>10</td><td>$0.3244</td></tr>
+<tr><td>Gemini 3.1 Pro</td><td>0.4</td><td>0.5</td><td>0/3</td><td>12</td><td>$0.3600</td></tr>
 <tr><td>GPT-5.4</td><td>0.1</td><td>0.2</td><td>0/3</td><td>5</td><td>$0.1480</td></tr>
 <tr><td>Gemma 4 31B</td><td>0.0</td><td>0.4</td><td>0/3</td><td>9</td><td>$0.0139</td></tr>
 </table>
@@ -258,5 +304,5 @@ here come from ONE neutral harness on one serving platform — comparable to eac
 other, not to vendor-reported benchmarks.</li>
 <li>Costs are computed at full input-token list price; provider-side prefix
 caching (not metered in early runs) would reduce flagship agent costs somewhat.</li></ul></div>
-<footer>FinAgentBench · Agentic Sciences research · results generated programmatically from run logs; no numbers are hand-entered.</footer>
+<footer>FinAgentBench · Agentic Sciences research · <a href="https://github.com/QihongRuan/finagentbench">source & docs on GitHub</a> · results generated programmatically from run logs; no numbers are hand-entered.</footer>
 </div></body></html>

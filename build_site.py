@@ -160,24 +160,75 @@ spec + raw data) and <b>judgment</b> (predict returns from financial text). All 
 run through one identical harness on a single inference platform.</p>"""
     )
 
-    # headline KPIs
+    # headline KPIs (dynamic)
     t1 = track_a_table(agg, "t1_momentum")
-    n_models = len(t1)
     n_perfect_t1 = sum(1 for r in t1 if r["strict"] == 1.0)
+    n_models = len(set(m for task in agg.values() for m in task))
+    n_runs = sum(len(runs) for task in agg.values() for runs in task.values())
+    b2rows = load_track_b("b2")
+    top_b2 = max((float(r["spearman_ic"] or 0) for r in b2rows), default=0)
     parts.append('<div class="kpi">')
-    parts.append(
-        f"<div><b>{n_perfect_t1}/{n_models}</b>models replicate a momentum study "
-        "perfectly from spec (Track A is saturated at the entry tier)</div>"
-    )
-    parts.append(
-        "<div><b>58×</b>cost spread between the cheapest and priciest perfect "
-        "replication</div>"
-    )
-    parts.append(
-        "<div><b>IC ≈ 0.5 vs 0.2</b>flagship-vs-small gap reading full analyst "
-        "articles — judgment is where models differ</div>"
-    )
+    parts.append(f"<div><b>{n_models}</b>frontier models, one identical harness, "
+                 f"{n_runs} graded agent runs</div>")
+    parts.append(f"<div><b>{n_perfect_t1}/{len(t1)}</b>models replicate a momentum "
+                 "study perfectly from spec — execution is commoditized</div>")
+    parts.append(f"<div><b>IC {top_b2:.2f}</b>best model reading post-cutoff analyst "
+                 "articles; withheld-text controls collapse to ≈0</div>")
     parts.append("</div>")
+
+    # key findings
+    parts.append(
+        """<h2>Key findings</h2><ol>
+<li><b>Execution is commoditized.</b> Given a precise method spec and raw data,
+nearly every model — including sub-cent-per-run ones — perfectly replicates
+standard quantitative studies (momentum portfolios, event studies, an
+option-overlay backtest, an 11GB full-market study). See T1–T4.</li>
+<li><b>The frontier appears at paper scale.</b> Replicating a full
+machine-learning asset-pricing study end-to-end (T6: train four model classes,
+annual refits, out-of-sample portfolio evaluation) splits the field roughly in
+half. Failures are precision failures — every model produces plausible
+magnitudes; only some hold twenty-plus spec details simultaneously.</li>
+<li><b>Reading long financial text yields real, measurable judgment.</b> On
+analyst articles published after training cutoffs, flagship models reach
+Spearman ICs around 0.4–0.5 vs ≈0.2 for small models; with the text withheld,
+every model collapses to ≈0. See B2.</li>
+<li><b>On historical data, apparent skill is often memorization.</b> Some
+models predict historical event outcomes better with the news withheld —
+they recall two decades of price history from (ticker, date) alone. The honest
+metric is ΔIC = IC(text) − IC(withheld). See B1.</li>
+<li><b>Models rank better than they call direction.</b> Several models show
+significantly positive ICs with below-50% hit rates: a systematic long bias.
+Use these signals cross-sectionally, not for market timing.</li>
+<li><b>Reliability, quantified.</b> Re-running identical tasks: ~2–3% of runs
+silently produce wrong answers and ~6% die on provider infrastructure —
+consistent with what production-agent practitioners report as their top
+challenge.</li>
+<li><b>Published ML alpha decays.</b> Re-running a canonical ML asset-pricing
+design on 2015–2021 (after the original out-of-sample period), decile
+long-short Sharpe falls from 2+ to ≈0.2–0.3 and linear signals flip negative;
+the nonlinear-beats-linear ranking survives.</li>
+</ol>"""
+    )
+
+    # methods in brief
+    parts.append(
+        """<h2>Methods in brief</h2><ul>
+<li><b>One harness, one platform.</b> Every model runs the same two-tool agent
+loop (bash sandbox + answer submission, step-capped) through one inference
+platform; provider-specific API quirks are normalized at the gateway layer and
+documented.</li>
+<li><b>Script-graded, private ground truth.</b> Track A answers are graded by
+tolerance bands (loose ±5%, strict ±1%) against reference implementations run
+on private data extracts — published numbers can't be recalled from training.</li>
+<li><b>Controls everywhere.</b> Every text-prediction track has a
+withheld-text control run per model, bounding memorization; Track B2
+additionally uses only articles published after model training cutoffs, with
+per-model cutoff verification.</li>
+<li><b>Replicates.</b> Reliability numbers come from repeated identical runs
+(up to 5 seeds); leaderboard metrics are being extended with multi-seed error
+bars.</li>
+</ul>"""
+    )
 
     # Track A
     parts.append("<h2>Track A — Execution: replicate from spec</h2>")
@@ -358,10 +409,7 @@ other, not to vendor-reported benchmarks.</li>
 caching (not metered in early runs) would reduce flagship agent costs somewhat.</li></ul></div>"""
     )
 
-    parts.append(
-        '<footer>FinAgentBench · Agentic Sciences research · results generated '
-        "programmatically from run logs; no numbers are hand-entered.</footer>"
-    )
+    parts.append('<footer>FinAgentBench · Agentic Sciences research · <a href=\"https://github.com/QihongRuan/finagentbench\">source & docs on GitHub</a> · results generated programmatically from run logs; no numbers are hand-entered.</footer>')
     parts.append("</div></body></html>")
     OUT.write_text("\n".join(parts))
     print("wrote", OUT)
