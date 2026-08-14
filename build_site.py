@@ -380,6 +380,33 @@ bars.</li>
             parts.append("<tr>" + td(t) + td(m) + td(c) + "</tr>")
         parts.append("</table>")
 
+    # agent efficacy: IC -> P&L, stability, preregistration
+    pstats = ROOT / "trackB_news" / "b2_portfolio_stats.csv"
+    if pstats.exists():
+        parts.append(
+            "<h2>Agent efficacy — from ranking skill to P&amp;L</h2>"
+            "<p>Three falsifiable checks on the strongest signal (B2). "
+            "<b>1) Tradability:</b> weekly long/short tercile portfolios from each "
+            "model's predictions, 20-day overlapping holds, 10bps one-way costs — "
+            "all configurations finished positive over the (short, 3-month) sample. "
+            "<b>2) Stability:</b> re-running the same model on the same articles "
+            "gives prediction rank-correlation ≈ 0.9 and near-identical ICs "
+            "(Qwen3.8-Max 0.451→0.468, Sonnet-5 0.389→0.437 across seeds). "
+            "<b>3) Pre-registration:</b> predictions for brand-new articles are "
+            "committed to this repository <i>before outcomes exist</i> — see "
+            "<a href=\"preregistered_2026-08-13.json\">the locked file</a>; check "
+            "back a month later.</p>"
+        )
+        parts.append("<table><tr><th>Configuration</th><th>Cohorts</th><th>Ann. ret</th>"
+                     "<th>Ann. vol</th><th>Sharpe</th><th>Max DD</th></tr>")
+        for r in csv.DictReader(open(pstats)):
+            parts.append("<tr>" + td(r["model"]) + td(r["n_cohorts"])
+                         + td(r["ann_ret_pct"] + "%") + td(r["ann_vol_pct"] + "%")
+                         + td(r["sharpe"]) + td(r["max_dd_pct"] + "%") + "</tr>")
+        parts.append("</table><p class=\"sub\">67 trading days, Apr–Aug 2026, AI-heavy "
+                     "universe, overlapping cohorts — treat annualized figures as "
+                     "directional, not expected returns.</p>")
+
     # which-text-has-alpha contrast
     parts.append(
         "<h2>Which financial text carries alpha?</h2>"

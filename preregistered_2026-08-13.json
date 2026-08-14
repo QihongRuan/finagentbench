@@ -1,0 +1,1217 @@
+{
+ "registered_at_utc": "2026-08-13T23:01:38.523363+00:00",
+ "task": "predict 20-trading-day market-adjusted (vs SPY) return, in bps, from first close after publish date",
+ "models": [
+  "anthropic/claude-sonnet-5",
+  "x-ai/grok-4.5",
+  "openai/gpt-5.4",
+  "openai/gpt-5.6-sol",
+  "anthropic/claude-opus-5"
+ ],
+ "predictions": [
+  {
+   "slug": "4935316-apple-a-rare-downgrade-that-has-nothing-to-do-with-ai",
+   "ticker": "AAPL",
+   "pub_date": "2026-08-12",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": -150.0,
+     "conf": 0.45
+    },
+    "x-ai/grok-4.5": {
+     "bps": -85.0,
+     "conf": 0.38
+    },
+    "openai/gpt-5.4": {
+     "bps": -320.0,
+     "conf": 0.71
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": -180.0,
+     "conf": 0.64
+    },
+    "anthropic/claude-opus-5": {
+     "bps": -150.0,
+     "conf": 0.32
+    }
+   },
+   "ensemble_bps": -177.0
+  },
+  {
+   "slug": "4936371-after-calling-microsofts-inflection-point-heres-what-i-see-coming-next",
+   "ticker": "MSFT",
+   "pub_date": "2026-08-13",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 150.0,
+     "conf": 0.55
+    },
+    "x-ai/grok-4.5": {
+     "bps": 35.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": 180.0,
+     "conf": 0.68
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 85.0,
+     "conf": 0.58
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 60.0,
+     "conf": 0.32
+    }
+   },
+   "ensemble_bps": 102.0
+  },
+  {
+   "slug": "4934979-microsoft-dont-get-too-excited-rating-downgrade",
+   "ticker": "MSFT",
+   "pub_date": "2026-08-11",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": -50.0,
+     "conf": 0.4
+    },
+    "x-ai/grok-4.5": {
+     "bps": -35.0,
+     "conf": 0.32
+    },
+    "openai/gpt-5.4": {
+     "bps": -220.0,
+     "conf": 0.7
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": -120.0,
+     "conf": 0.61
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 40.0,
+     "conf": 0.32
+    }
+   },
+   "ensemble_bps": -77.0
+  },
+  {
+   "slug": "4934698-youre-underestimating-microsofts-moat",
+   "ticker": "MSFT",
+   "pub_date": "2026-08-11",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 80.0,
+     "conf": 0.3
+    },
+    "x-ai/grok-4.5": {
+     "bps": 35.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": 320.0,
+     "conf": 0.67
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 85.0,
+     "conf": 0.58
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 30.0,
+     "conf": 0.35
+    }
+   },
+   "ensemble_bps": 110.0
+  },
+  {
+   "slug": "4934637-microsoft-vs-amd-investors-may-be-watching-the-wrong-variables-panel-regression",
+   "ticker": "MSFT",
+   "pub_date": "2026-08-11",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 80.0,
+     "conf": 0.45
+    },
+    "x-ai/grok-4.5": {
+     "bps": 45.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": 280.0,
+     "conf": 0.67
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 125.0,
+     "conf": 0.58
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 60.0,
+     "conf": 0.32
+    }
+   },
+   "ensemble_bps": 118.0
+  },
+  {
+   "slug": "4933700-microsoft-corporation-a-buy-and-hold-forever-type-of-stock",
+   "ticker": "MSFT",
+   "pub_date": "2026-08-08",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 80.0,
+     "conf": 0.55
+    },
+    "x-ai/grok-4.5": {
+     "bps": 35.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": 180.0,
+     "conf": 0.63
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 55.0,
+     "conf": 0.56
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 40.0,
+     "conf": 0.32
+    }
+   },
+   "ensemble_bps": 78.0
+  },
+  {
+   "slug": "4933698-microsoft-big-new-ai-advantage-but-beware-duration-mismatch",
+   "ticker": "MSFT",
+   "pub_date": "2026-08-08",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 80.0,
+     "conf": 0.3
+    },
+    "x-ai/grok-4.5": {
+     "bps": 35.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": 180.0,
+     "conf": 0.62
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 85.0,
+     "conf": 0.57
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 60.0,
+     "conf": 0.3
+    }
+   },
+   "ensemble_bps": 88.0
+  },
+  {
+   "slug": "4933001-microsoft-no-dead-cat-bounce-here-q4-review",
+   "ticker": "MSFT",
+   "pub_date": "2026-08-07",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 150.0,
+     "conf": 0.55
+    },
+    "x-ai/grok-4.5": {
+     "bps": 45.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": 380.0,
+     "conf": 0.72
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 85.0,
+     "conf": 0.62
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 120.0,
+     "conf": 0.35
+    }
+   },
+   "ensemble_bps": 156.0
+  },
+  {
+   "slug": "4935952-nvidia-the-concentration-bear-case-has-lost-half-its-footing",
+   "ticker": "NVDA",
+   "pub_date": "2026-08-13",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 150.0,
+     "conf": 0.55
+    },
+    "x-ai/grok-4.5": {
+     "bps": 45.0,
+     "conf": 0.22
+    },
+    "openai/gpt-5.4": {
+     "bps": 320.0,
+     "conf": 0.68
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 180.0,
+     "conf": 0.58
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 150.0,
+     "conf": 0.32
+    }
+   },
+   "ensemble_bps": 169.0
+  },
+  {
+   "slug": "4934263-nvidia-buy-before-q2-shows-the-ai-factory-trade-is-still-early-upgrade",
+   "ticker": "NVDA",
+   "pub_date": "2026-08-10",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 150.0,
+     "conf": 0.35
+    },
+    "x-ai/grok-4.5": {
+     "bps": 120.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": 350.0,
+     "conf": 0.67
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 180.0,
+     "conf": 0.58
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 120.0,
+     "conf": 0.32
+    }
+   },
+   "ensemble_bps": 184.0
+  },
+  {
+   "slug": "4934013-nvidia-turning-ai-complexity-into-compounding-moat",
+   "ticker": "NVDA",
+   "pub_date": "2026-08-10",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 250.0,
+     "conf": 0.55
+    },
+    "x-ai/grok-4.5": {
+     "bps": 45.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": 420.0,
+     "conf": 0.67
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 250.0,
+     "conf": 0.58
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 150.0,
+     "conf": 0.32
+    }
+   },
+   "ensemble_bps": 223.0
+  },
+  {
+   "slug": "4933395-nvidia-stock-is-completely-mispriced",
+   "ticker": "NVDA",
+   "pub_date": "2026-08-09",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 150.0,
+     "conf": 0.55
+    },
+    "x-ai/grok-4.5": {
+     "bps": 85.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": 420.0,
+     "conf": 0.68
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 180.0,
+     "conf": 0.58
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 120.0,
+     "conf": 0.35
+    }
+   },
+   "ensemble_bps": 191.0
+  },
+  {
+   "slug": "4933985-sp500-eps-revenue-growth-amazon-earnings",
+   "ticker": "SPX",
+   "pub_date": "2026-08-10",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 0.0,
+     "conf": 0.3
+    },
+    "x-ai/grok-4.5": {
+     "bps": 0.0,
+     "conf": 0.85
+    },
+    "openai/gpt-5.4": {
+     "bps": 18.0,
+     "conf": 0.31
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 15.0,
+     "conf": 0.56
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 0.0,
+     "conf": 0.6
+    }
+   },
+   "ensemble_bps": 6.6
+  },
+  {
+   "slug": "4933980-amazon-stunning-earnings-reaffirms-thesis",
+   "ticker": "AMZN",
+   "pub_date": "2026-08-10",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 150.0,
+     "conf": 0.55
+    },
+    "x-ai/grok-4.5": {
+     "bps": 85.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": 420.0,
+     "conf": 0.72
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 120.0,
+     "conf": 0.57
+    },
+    "anthropic/claude-opus-5": {
+     "bps": -50.0,
+     "conf": 0.32
+    }
+   },
+   "ensemble_bps": 145.0
+  },
+  {
+   "slug": "4933194-amazon-throwing-spaghetti-on-the-wall-to-see-what-sticks",
+   "ticker": "AMZN",
+   "pub_date": "2026-08-07",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 150.0,
+     "conf": 0.35
+    },
+    "x-ai/grok-4.5": {
+     "bps": 45.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": 180.0,
+     "conf": 0.64
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 105.0,
+     "conf": 0.61
+    },
+    "anthropic/claude-opus-5": {
+     "bps": -140.0,
+     "conf": 0.35
+    }
+   },
+   "ensemble_bps": 68.0
+  },
+  {
+   "slug": "4932872-amazon-stronger-aws-growth-meets-a-much-heavier-investment-cycle",
+   "ticker": "AMZN",
+   "pub_date": "2026-08-07",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 50.0,
+     "conf": 0.35
+    },
+    "x-ai/grok-4.5": {
+     "bps": -35.0,
+     "conf": 0.32
+    },
+    "openai/gpt-5.4": {
+     "bps": 180.0,
+     "conf": 0.64
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": -125.0,
+     "conf": 0.61
+    },
+    "anthropic/claude-opus-5": {
+     "bps": -150.0,
+     "conf": 0.32
+    }
+   },
+   "ensemble_bps": -16.0
+  },
+  {
+   "slug": "4935997-alphabet-strong-fundamentals-support-todays-valuation",
+   "ticker": "GOOG",
+   "pub_date": "2026-08-13",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 150.0,
+     "conf": 0.4
+    },
+    "x-ai/grok-4.5": {
+     "bps": 35.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": 180.0,
+     "conf": 0.67
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 90.0,
+     "conf": 0.56
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 50.0,
+     "conf": 0.32
+    }
+   },
+   "ensemble_bps": 101.0
+  },
+  {
+   "slug": "4935931-wall-street-breakfast-podcast-google-trots-out-legend-to-inspire-gemini-devs",
+   "ticker": "GOOG",
+   "pub_date": "2026-08-13",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 150.0,
+     "conf": 0.35
+    },
+    "x-ai/grok-4.5": {
+     "bps": 35.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": 85.0,
+     "conf": 0.57
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 45.0,
+     "conf": 0.54
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 120.0,
+     "conf": 0.32
+    }
+   },
+   "ensemble_bps": 87.0
+  },
+  {
+   "slug": "4935248-alphabets-blowout-q2-confirmed-the-ai-stack-thesis-and-shares-are-still-undervalued",
+   "ticker": "GOOG",
+   "pub_date": "2026-08-12",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 250.0,
+     "conf": 0.55
+    },
+    "x-ai/grok-4.5": {
+     "bps": 45.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": 420.0,
+     "conf": 0.76
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 180.0,
+     "conf": 0.62
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 70.0,
+     "conf": 0.3
+    }
+   },
+   "ensemble_bps": 193.0
+  },
+  {
+   "slug": "4934782-spacex-vs-tesla-lets-see-which-musk-stock-wins",
+   "ticker": "SPCX",
+   "pub_date": "2026-08-11",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 250.0,
+     "conf": 0.35
+    },
+    "x-ai/grok-4.5": {
+     "bps": 65.0,
+     "conf": 0.32
+    },
+    "openai/gpt-5.4": {
+     "bps": 420.0,
+     "conf": 0.66
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 150.0,
+     "conf": 0.58
+    },
+    "anthropic/claude-opus-5": {
+     "bps": -150.0,
+     "conf": 0.3
+    }
+   },
+   "ensemble_bps": 147.0
+  },
+  {
+   "slug": "4935979-micron-buried-one-sentence-about-dec-9-it-could-begin-retiring-12-percent-of-its-shares",
+   "ticker": "MU",
+   "pub_date": "2026-08-13",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 250.0,
+     "conf": 0.45
+    },
+    "x-ai/grok-4.5": {
+     "bps": 45.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": 450.0,
+     "conf": 0.64
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 180.0,
+     "conf": 0.58
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 180.0,
+     "conf": 0.32
+    }
+   },
+   "ensemble_bps": 221.0
+  },
+  {
+   "slug": "4934102-micron-could-reclaim-its-previous-highs",
+   "ticker": "MU",
+   "pub_date": "2026-08-10",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 350.0,
+     "conf": 0.55
+    },
+    "x-ai/grok-4.5": {
+     "bps": 120.0,
+     "conf": 0.38
+    },
+    "openai/gpt-5.4": {
+     "bps": 650.0,
+     "conf": 0.66
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 850.0,
+     "conf": 0.62
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 500.0,
+     "conf": 0.35
+    }
+   },
+   "ensemble_bps": 494.0
+  },
+  {
+   "slug": "4934468-arista-networks-hefty-growth-premium-baked-in-ai-pickshovel-status-proven-downgrade",
+   "ticker": "ANET",
+   "pub_date": "2026-08-11",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": -150.0,
+     "conf": 0.55
+    },
+    "x-ai/grok-4.5": {
+     "bps": -280.0,
+     "conf": 0.38
+    },
+    "openai/gpt-5.4": {
+     "bps": -450.0,
+     "conf": 0.69
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": -180.0,
+     "conf": 0.62
+    },
+    "anthropic/claude-opus-5": {
+     "bps": -80.0,
+     "conf": 0.3
+    }
+   },
+   "ensemble_bps": -228.0
+  },
+  {
+   "slug": "4933849-arista-networks-strong-quarterly-earnings-keeps-the-buy-thesis-intact",
+   "ticker": "ANET",
+   "pub_date": "2026-08-09",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 150.0,
+     "conf": 0.55
+    },
+    "x-ai/grok-4.5": {
+     "bps": 45.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": 280.0,
+     "conf": 0.68
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 85.0,
+     "conf": 0.36
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 120.0,
+     "conf": 0.35
+    }
+   },
+   "ensemble_bps": 136.0
+  },
+  {
+   "slug": "4933691-why-arista-networks-is-a-buy-despite-rising-competition",
+   "ticker": "ANET",
+   "pub_date": "2026-08-08",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 150.0,
+     "conf": 0.45
+    },
+    "x-ai/grok-4.5": {
+     "bps": 85.0,
+     "conf": 0.34
+    },
+    "openai/gpt-5.4": {
+     "bps": 280.0,
+     "conf": 0.69
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 180.0,
+     "conf": 0.58
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 180.0,
+     "conf": 0.32
+    }
+   },
+   "ensemble_bps": 175.0
+  },
+  {
+   "slug": "4933664-arista-network-beating-the-incumbents",
+   "ticker": "ANET",
+   "pub_date": "2026-08-08",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 50.0,
+     "conf": 0.35
+    },
+    "x-ai/grok-4.5": {
+     "bps": 35.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": 180.0,
+     "conf": 0.64
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 150.0,
+     "conf": 0.55
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 50.0,
+     "conf": 0.3
+    }
+   },
+   "ensemble_bps": 93.0
+  },
+  {
+   "slug": "4933009-palantir-ai-bottleneck-moved-in-its-favor",
+   "ticker": "PLTR",
+   "pub_date": "2026-08-07",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 250.0,
+     "conf": 0.35
+    },
+    "x-ai/grok-4.5": {
+     "bps": 120.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": 650.0,
+     "conf": 0.72
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": -850.0,
+     "conf": 0.68
+    },
+    "anthropic/claude-opus-5": {
+     "bps": -150.0,
+     "conf": 0.32
+    }
+   },
+   "ensemble_bps": 4.0
+  },
+  {
+   "slug": "4935437-nebius-q2-just-made-the-bull-case-stronger",
+   "ticker": "NBIS",
+   "pub_date": "2026-08-12",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 250.0,
+     "conf": 0.45
+    },
+    "x-ai/grok-4.5": {
+     "bps": 280.0,
+     "conf": 0.34
+    },
+    "openai/gpt-5.4": {
+     "bps": 850.0,
+     "conf": 0.71
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 420.0,
+     "conf": 0.58
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 150.0,
+     "conf": 0.25
+    }
+   },
+   "ensemble_bps": 390.0
+  },
+  {
+   "slug": "4934205-nebius-strong-buy-before-q2-earnings",
+   "ticker": "NBIS",
+   "pub_date": "2026-08-10",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 800.0,
+     "conf": 0.4
+    },
+    "x-ai/grok-4.5": {
+     "bps": 650.0,
+     "conf": 0.32
+    },
+    "openai/gpt-5.4": {
+     "bps": 950.0,
+     "conf": 0.64
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 850.0,
+     "conf": 0.64
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 2800.0,
+     "conf": 0.6
+    }
+   },
+   "ensemble_bps": 1210.0
+  },
+  {
+   "slug": "4934085-nebius-the-34-billion-execution-test-starts-now",
+   "ticker": "NBIS",
+   "pub_date": "2026-08-10",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 1500.0,
+     "conf": 0.55
+    },
+    "x-ai/grok-4.5": {
+     "bps": -280.0,
+     "conf": 0.34
+    },
+    "openai/gpt-5.4": {
+     "bps": -650.0,
+     "conf": 0.68
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": -850.0,
+     "conf": 0.68
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 2600.0,
+     "conf": 0.62
+    }
+   },
+   "ensemble_bps": 464.0
+  },
+  {
+   "slug": "4936374-coreweave-buy-the-ai-backlog-but-watch-the-debt-downgrade",
+   "ticker": "CRWV",
+   "pub_date": "2026-08-13",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 150.0,
+     "conf": 0.35
+    },
+    "x-ai/grok-4.5": {
+     "bps": -45.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": 450.0,
+     "conf": 0.69
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": -180.0,
+     "conf": 0.58
+    },
+    "anthropic/claude-opus-5": {
+     "bps": -350.0,
+     "conf": 0.25
+    }
+   },
+   "ensemble_bps": 5.0
+  },
+  {
+   "slug": "4935865-coreweave-q2-contracts-are-getting-shorter-debt-isnt",
+   "ticker": "CRWV",
+   "pub_date": "2026-08-13",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 300.0,
+     "conf": 0.35
+    },
+    "x-ai/grok-4.5": {
+     "bps": 120.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": 850.0,
+     "conf": 0.67
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 450.0,
+     "conf": 0.62
+    },
+    "anthropic/claude-opus-5": {
+     "bps": -250.0,
+     "conf": 0.25
+    }
+   },
+   "ensemble_bps": 294.0
+  },
+  {
+   "slug": "4935825-coreweave-stock-debt-is-high-but-backlog-could-drive-fy28-inflection",
+   "ticker": "CRWV",
+   "pub_date": "2026-08-13",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 300.0,
+     "conf": 0.35
+    },
+    "x-ai/grok-4.5": {
+     "bps": 85.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": 850.0,
+     "conf": 0.66
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 325.0,
+     "conf": 0.57
+    },
+    "anthropic/claude-opus-5": {
+     "bps": -450.0,
+     "conf": 0.3
+    }
+   },
+   "ensemble_bps": 222.0
+  },
+  {
+   "slug": "4935579-coreweave-green-shoots-but-still-a-balancing-act",
+   "ticker": "CRWV",
+   "pub_date": "2026-08-12",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": -150.0,
+     "conf": 0.35
+    },
+    "x-ai/grok-4.5": {
+     "bps": -85.0,
+     "conf": 0.32
+    },
+    "openai/gpt-5.4": {
+     "bps": 250.0,
+     "conf": 0.61
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": -250.0,
+     "conf": 0.58
+    },
+    "anthropic/claude-opus-5": {
+     "bps": -250.0,
+     "conf": 0.25
+    }
+   },
+   "ensemble_bps": -97.0
+  },
+  {
+   "slug": "4935336-coreweave-what-the-markets-not-telling-you",
+   "ticker": "CRWV",
+   "pub_date": "2026-08-12",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 300.0,
+     "conf": 0.45
+    },
+    "x-ai/grok-4.5": {
+     "bps": 220.0,
+     "conf": 0.34
+    },
+    "openai/gpt-5.4": {
+     "bps": 650.0,
+     "conf": 0.67
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 350.0,
+     "conf": 0.58
+    },
+    "anthropic/claude-opus-5": {
+     "bps": -450.0,
+     "conf": 0.32
+    }
+   },
+   "ensemble_bps": 214.0
+  },
+  {
+   "slug": "4935257-coreweave-dont-get-too-excited-about-q2",
+   "ticker": "CRWV",
+   "pub_date": "2026-08-12",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": -150.0,
+     "conf": 0.35
+    },
+    "x-ai/grok-4.5": {
+     "bps": -120.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": -420.0,
+     "conf": 0.67
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": -250.0,
+     "conf": 0.61
+    },
+    "anthropic/claude-opus-5": {
+     "bps": -250.0,
+     "conf": 0.25
+    }
+   },
+   "ensemble_bps": -238.0
+  },
+  {
+   "slug": "4934604-intel-stock-this-pullback-golden-opportunity-rating-upgrade",
+   "ticker": "INTC",
+   "pub_date": "2026-08-11",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 250.0,
+     "conf": 0.55
+    },
+    "x-ai/grok-4.5": {
+     "bps": 85.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": 450.0,
+     "conf": 0.66
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 180.0,
+     "conf": 0.56
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 250.0,
+     "conf": 0.35
+    }
+   },
+   "ensemble_bps": 243.0
+  },
+  {
+   "slug": "4934513-intel-joins-race-to-sell-shares-at-sky-high-prices-economy-benefits-maybe-not-investors",
+   "ticker": "INTC",
+   "pub_date": "2026-08-11",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": -150.0,
+     "conf": 0.55
+    },
+    "x-ai/grok-4.5": {
+     "bps": -450.0,
+     "conf": 0.42
+    },
+    "openai/gpt-5.4": {
+     "bps": -650.0,
+     "conf": 0.83
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": -650.0,
+     "conf": 0.68
+    },
+    "anthropic/claude-opus-5": {
+     "bps": -100.0,
+     "conf": 0.15
+    }
+   },
+   "ensemble_bps": -400.0
+  },
+  {
+   "slug": "4934436-intel-stock-buy-the-equity-raise-rating-upgrade",
+   "ticker": "INTC",
+   "pub_date": "2026-08-10",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 150.0,
+     "conf": 0.45
+    },
+    "x-ai/grok-4.5": {
+     "bps": 85.0,
+     "conf": 0.34
+    },
+    "openai/gpt-5.4": {
+     "bps": 650.0,
+     "conf": 0.65
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 250.0,
+     "conf": 0.58
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 150.0,
+     "conf": 0.32
+    }
+   },
+   "ensemble_bps": 257.0
+  },
+  {
+   "slug": "4935963-netflix-the-window-before-the-re-rating",
+   "ticker": "NFLX",
+   "pub_date": "2026-08-13",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 250.0,
+     "conf": 0.55
+    },
+    "x-ai/grok-4.5": {
+     "bps": 65.0,
+     "conf": 0.32
+    },
+    "openai/gpt-5.4": {
+     "bps": 420.0,
+     "conf": 0.68
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 180.0,
+     "conf": 0.59
+    },
+    "anthropic/claude-opus-5": {
+     "bps": -150.0,
+     "conf": 0.32
+    }
+   },
+   "ensemble_bps": 153.0
+  },
+  {
+   "slug": "4935395-netflix-the-market-is-underappreciating-2027-earnings-power",
+   "ticker": "NFLX",
+   "pub_date": "2026-08-12",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 150.0,
+     "conf": 0.35
+    },
+    "x-ai/grok-4.5": {
+     "bps": 45.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": 650.0,
+     "conf": 0.72
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 120.0,
+     "conf": 0.42
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 0.0,
+     "conf": 0.3
+    }
+   },
+   "ensemble_bps": 193.0
+  },
+  {
+   "slug": "4935246-uber-three-growth-engines-make-the-av-spending-risk-worth-taking-rating-upgrade",
+   "ticker": "UBER",
+   "pub_date": "2026-08-12",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 250.0,
+     "conf": 0.35
+    },
+    "x-ai/grok-4.5": {
+     "bps": 45.0,
+     "conf": 0.22
+    },
+    "openai/gpt-5.4": {
+     "bps": 320.0,
+     "conf": 0.71
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 225.0,
+     "conf": 0.6
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 150.0,
+     "conf": 0.32
+    }
+   },
+   "ensemble_bps": 198.0
+  },
+  {
+   "slug": "4934458-uber-shares-q2-ready-to-rerate-fast-and-aggressively",
+   "ticker": "UBER",
+   "pub_date": "2026-08-10",
+   "preds": {
+    "anthropic/claude-sonnet-5": {
+     "bps": 350.0,
+     "conf": 0.55
+    },
+    "x-ai/grok-4.5": {
+     "bps": 35.0,
+     "conf": 0.28
+    },
+    "openai/gpt-5.4": {
+     "bps": 650.0,
+     "conf": 0.73
+    },
+    "openai/gpt-5.6-sol": {
+     "bps": 275.0,
+     "conf": 0.58
+    },
+    "anthropic/claude-opus-5": {
+     "bps": 60.0,
+     "conf": 0.32
+    }
+   },
+   "ensemble_bps": 274.0
+  }
+ ]
+}
