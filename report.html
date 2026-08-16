@@ -97,7 +97,9 @@ economically sensible and very consistent:</p>
 </table>
 <p>In short: AI adds value where information diffuses slowly — opinions,
 interpretations, disclosures with a lag. It adds nothing where the market has
-already reacted.</p>
+already reacted. Worse: on earnings text the models extrapolate the
+announcement's direction while the market mean-reverts over the following
+weeks — a naive AI reader would systematically buy short-term tops.</p>
 
 <h2>Finding 5: does it actually make money?</h2>
 <p>We turned the essay-reading predictions into simulated weekly portfolios —
@@ -105,7 +107,10 @@ buy the stocks each AI was most bullish on, short the ones it was most bearish
 on, hold a month, subtract trading costs. Over the three months of data,
 <b>all ten configurations we tried came out positive</b>, several strongly so.
 The predictions also replicate: run the same model twice and its predictions
-correlate about 0.9.</p>
+correlate about 0.9. Two more details worth knowing: the models' self-reported
+confidence is informative (their high-confidence half is roughly twice as
+accurate as their low-confidence half), and their predicted magnitudes — not
+just directions — are approximately correctly scaled.</p>
 <div class="warn">Three months is a very short backtest, concentrated in
 AI-related stocks, in one market regime. The honest claims are: the ranking skill
 is real and stable; the strategy simulation is <i>consistent with</i> it being
