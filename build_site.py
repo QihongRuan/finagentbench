@@ -171,7 +171,7 @@ footer{margin-top:3em;color:var(--muted);font-size:.85rem;border-top:1px solid v
 <div class="hero-marker"></div>
 <div class="hero">
 <h1>FinAgentBench</h1>
-<p class="sub">📖 <a href="report.html">Plain-language report</a> ·
+<p class="sub">📖 <a href="report.html">Plain-language report</a> · <a href="report-zh.html">中文报告</a> ·
 📄 <a href="finagentbench.pdf">Working paper (PDF)</a> ·
 🔒 <a href="preregistered_2026-08-13.json">Pre-registered predictions</a></p>
 <p>Can LLM agents do quantitative finance research? Two capabilities, measured

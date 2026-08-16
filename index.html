@@ -33,7 +33,7 @@ footer{margin-top:3em;color:var(--muted);font-size:.85rem;border-top:1px solid v
 <div class="layout"><nav class="sidebar"><h2>FinAgentBench</h2><a href="#key-findings">Key findings</a><a href="#methods-in-brief">Methods in brief</a><a href="#track-a-execution-replicate-from-spec">Track A — Execution: replicate from spec</a><a href="#t1-20-stock-momentum" class="sub">T1 · 20-stock momentum</a><a href="#t2-news-event-study" class="sub">T2 · News event study</a><a href="#t3-covered-call-option-backtest" class="sub">T3 · Covered-call option backtest</a><a href="#t4-full-market-momentum-11gb" class="sub">T4 · Full-market momentum (11GB)</a><a href="#t6-replicate-an-ml-asset-pricing-study-r" class="sub">T6 · Replicate an ML asset-pricing study (R…</a><a href="#track-b-judgment-predict-returns-from-te">Track B — Judgment: predict returns from text</a><a href="#b1-news-headlines" class="sub">B1 · News headlines</a><a href="#b2-analyst-articles-post-cutoff" class="sub">B2 · Analyst articles (post-cutoff)</a><a href="#b4-earnings-press-releases-post-cutoff" class="sub">B4 · Earnings press releases (post-cutoff)</a><a href="#b6-earnings-call-transcripts-post-cutoff" class="sub">B6 · Earnings-call transcripts (post-cutoff)</a><a href="#b5-13f-smart-money-adds-post-cutoff-smal" class="sub">B5 · 13F smart-money adds (post-cutoff, sma…</a><a href="#b7-fomc-statements-minutes-macro" class="sub">B7 · FOMC statements & minutes (macro)</a><a href="#b3-sec-filing-md-a" class="sub">B3 · SEC filing MD&A</a><a href="#cost-optimal-routing">Cost-optimal routing</a><a href="#agent-efficacy-from-ranking-skill-to-p-a">Agent efficacy — from ranking skill to P&am…</a><a href="#which-financial-text-carries-alpha">Which financial text carries alpha?</a><a href="#side-finding-ml-asset-pricing-alpha-afte">Side finding — ML asset-pricing alpha after…</a><a href="#honest-caveats">Honest caveats</a><a class="ghside" href="https://github.com/QihongRuan/finagentbench">GitHub repo →</a></nav><main class="content">
 <div class="hero">
 <h1>FinAgentBench</h1>
-<p class="sub">📖 <a href="report.html">Plain-language report</a> ·
+<p class="sub">📖 <a href="report.html">Plain-language report</a> · <a href="report-zh.html">中文报告</a> ·
 📄 <a href="finagentbench.pdf">Working paper (PDF)</a> ·
 🔒 <a href="preregistered_2026-08-13.json">Pre-registered predictions</a></p>
 <p>Can LLM agents do quantitative finance research? Two capabilities, measured
@@ -217,9 +217,9 @@ bars.</li>
 <tr><td>Claude Opus 5</td><td>297</td><td>0.5118</td><td>0.5903</td><td>0.6271</td><td>2026-05 ⚠️</td><td>4447.3</td><td>-0.0261</td></tr>
 <tr><td>GPT-5.5</td><td>292</td><td>0.476</td><td>0.4678</td><td>0.562</td><td>UNDISCLOSED ⚠️</td><td>2759.0</td><td>0.0376</td></tr>
 <tr><td>Qwen_Qwen3.8-Max.seed1</td><td>296</td><td>0.4728</td><td>0.4677</td><td>0.6039</td><td>UNDISCLOSED ⚠️</td><td>2730.0</td><td></td></tr>
+<tr><td>Kimi K3</td><td>279</td><td>0.482</td><td>0.452</td><td>0.481</td><td>UNDISCLOSED ⚠️</td><td>2773.4</td><td>0.2397</td></tr>
 <tr><td>Qwen3.8 Max</td><td>296</td><td>0.4881</td><td>0.4514</td><td>0.6027</td><td>UNDISCLOSED ⚠️</td><td>2687.2</td><td></td></tr>
 <tr><td>anthropic_claude-sonnet-5.seed1</td><td>297</td><td>0.4764</td><td>0.4367</td><td>0.4249</td><td>UNDISCLOSED ⚠️</td><td>2579.1</td><td></td></tr>
-<tr><td>Kimi K3</td><td>239</td><td>0.4874</td><td>0.4357</td><td>0.4504</td><td>UNDISCLOSED ⚠️</td><td>3261.9</td><td>0.2397</td></tr>
 <tr><td>openai_gpt-5.5.seed2</td><td>292</td><td>0.4674</td><td>0.4297</td><td>0.4798</td><td>UNDISCLOSED ⚠️</td><td>2420.7</td><td></td></tr>
 <tr><td>Qwen_Qwen3.8-Max.seed2</td><td>285</td><td>0.4965</td><td>0.4183</td><td>0.5771</td><td>UNDISCLOSED ⚠️</td><td>2625.9</td><td></td></tr>
 <tr><td>anthropic_claude-sonnet-5.seed2</td><td>297</td><td>0.461</td><td>0.4181</td><td>0.4414</td><td>UNDISCLOSED ⚠️</td><td>2274.2</td><td></td></tr>
@@ -236,27 +236,27 @@ bars.</li>
 <tr><td>MiniMax M3</td><td>293</td><td>0.4418</td><td>0.258</td><td>0.2526</td><td>UNDISCLOSED ⚠️</td><td>2048.9</td><td>0.0151</td></tr>
 <tr><td>GPT-5.4</td><td>297</td><td>0.4276</td><td>0.2579</td><td>0.2797</td><td>2025-08</td><td>1873.3</td><td>-0.0174</td></tr>
 <tr><td>GPT-5.6 Terra</td><td>297</td><td>0.4291</td><td>0.2414</td><td>0.2072</td><td>UNDISCLOSED ⚠️</td><td>1813.3</td><td>0.2342</td></tr>
-<tr><td>DeepSeek V4 Flash</td><td>280</td><td>0.4286</td><td>0.2182</td><td>0.2385</td><td>UNDISCLOSED ⚠️</td><td>1747.1</td><td>-0.0293</td></tr>
 <tr><td>anthropic_claude-sonnet-4.5</td><td>297</td><td>0.4426</td><td>0.217</td><td>0.1823</td><td>UNDISCLOSED ⚠️</td><td>1589.6</td><td></td></tr>
 <tr><td>Grok 4.5</td><td>297</td><td>0.4257</td><td>0.2143</td><td>0.2718</td><td>2026-02</td><td>1096.4</td><td></td></tr>
-<tr><td>deepseek-ai_DeepSeek-R1-0528</td><td>183</td><td>0.4725</td><td>0.2039</td><td>0.2408</td><td>UNDISCLOSED ⚠️</td><td>1368.7</td><td>-0.2132</td></tr>
+<tr><td>DeepSeek V4 Flash</td><td>292</td><td>0.4316</td><td>0.2056</td><td>0.2357</td><td>UNDISCLOSED ⚠️</td><td>1416.4</td><td>-0.0293</td></tr>
+<tr><td>Kimi K2.6</td><td>264</td><td>0.4275</td><td>0.2022</td><td>0.163</td><td>UNDISCLOSED ⚠️</td><td>2285.2</td><td>0.0483</td></tr>
 <tr><td>x-ai_grok-4.5.seed2</td><td>297</td><td>0.4223</td><td>0.1991</td><td>0.2453</td><td>UNDISCLOSED ⚠️</td><td>1328.6</td><td></td></tr>
 <tr><td>XiaomiMiMo_MiMo-V2.5.seed1</td><td>296</td><td>0.4247</td><td>0.197</td><td>0.2308</td><td>UNDISCLOSED ⚠️</td><td>1560.8</td><td></td></tr>
 <tr><td>Gemini 3.1 Pro</td><td>297</td><td>0.4305</td><td>0.1941</td><td>0.1713</td><td>2025-01</td><td>1701.2</td><td></td></tr>
-<tr><td>Kimi K2.6</td><td>247</td><td>0.4187</td><td>0.1893</td><td>0.1314</td><td>UNDISCLOSED ⚠️</td><td>2471.3</td><td>0.0483</td></tr>
 <tr><td>GLM 5.2</td><td>282</td><td>0.4107</td><td>0.1885</td><td>0.2317</td><td>UNDISCLOSED ⚠️</td><td>1648.6</td><td>0.0238</td></tr>
 <tr><td>MiMo V2.5</td><td>297</td><td>0.4276</td><td>0.1866</td><td>0.2055</td><td>2024-12</td><td>1072.5</td><td>0.0408</td></tr>
 <tr><td>zai-org_GLM-5-FP8</td><td>276</td><td>0.4197</td><td>0.1832</td><td>0.2132</td><td>UNDISCLOSED ⚠️</td><td>1260.9</td><td>-0.0697</td></tr>
+<tr><td>DeepSeek V4 Pro</td><td>142</td><td>0.4892</td><td>0.1776</td><td>0.2043</td><td>UNDISCLOSED ⚠️</td><td>222.8</td><td>-0.0639</td></tr>
 <tr><td>moonshotai_Kimi-K2.5</td><td>297</td><td>0.4242</td><td>0.1644</td><td>0.2038</td><td>UNDISCLOSED ⚠️</td><td>548.6</td><td>-0.1331</td></tr>
 <tr><td>deepseek-ai_DeepSeek-V3-0324</td><td>296</td><td>0.4155</td><td>0.1533</td><td>0.163</td><td>UNDISCLOSED ⚠️</td><td>1048.3</td><td>-0.0123</td></tr>
 <tr><td>Claude Haiku 4.5</td><td>297</td><td>0.4377</td><td>0.149</td><td>0.1444</td><td>UNDISCLOSED ⚠️</td><td>782.2</td><td></td></tr>
 <tr><td>Hunyuan 3</td><td>278</td><td>0.417</td><td>0.1423</td><td>0.1164</td><td>UNDISCLOSED ⚠️</td><td>1044.3</td><td>0.0067</td></tr>
+<tr><td>deepseek-ai_DeepSeek-R1-0528</td><td>262</td><td>0.4423</td><td>0.1368</td><td>0.1479</td><td>UNDISCLOSED ⚠️</td><td>1203.3</td><td>-0.2132</td></tr>
 <tr><td>Gemma 4 31B</td><td>297</td><td>0.415</td><td>0.1319</td><td>0.1251</td><td>2025-01</td><td>747.9</td><td></td></tr>
 <tr><td>deepseek-ai_DeepSeek-V4-Flash.seed1</td><td>211</td><td>0.4265</td><td>0.1309</td><td>0.1639</td><td>UNDISCLOSED ⚠️</td><td>362.7</td><td></td></tr>
 <tr><td>DeepSeek V3.2</td><td>279</td><td>0.3943</td><td>0.1292</td><td>0.1567</td><td>UNDISCLOSED ⚠️</td><td>966.7</td><td>0.0534</td></tr>
 <tr><td>zai-org_GLM-5.2-FP8.seed1</td><td>277</td><td>0.3971</td><td>0.1221</td><td>0.1524</td><td>UNDISCLOSED ⚠️</td><td>684.5</td><td></td></tr>
 <tr><td>google_gemma-4-31b-it.seed1</td><td>297</td><td>0.4136</td><td>0.0986</td><td>0.1143</td><td>UNDISCLOSED ⚠️</td><td>417.7</td><td></td></tr>
-<tr><td>DeepSeek V4 Pro</td><td>101</td><td>0.449</td><td>0.0718</td><td>0.1034</td><td>UNDISCLOSED ⚠️</td><td>-520.1</td><td>-0.0639</td></tr>
 <tr><td>Qwen_Qwen3.5-397B-A17B</td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><td>Qwen_Qwen3.6-Max-Preview</td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><td>anthropic_claude-opus-4.1</td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
@@ -266,13 +266,15 @@ bars.</li>
 <tr><td>openai_gpt-4o</td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><td>openai_gpt-5</td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><td>openai_gpt-5.1</td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-<tr><td>openai_gpt-5.2</td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><td>zai-org_GLM-4.7-FP8</td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 </table>
 <h3 id="b4-earnings-press-releases-post-cutoff">B4 · Earnings press releases (post-cutoff)</h3><p>8-K item-2.02 earnings press releases filed with the SEC Feb–Jul 2026 (after most models' training cutoffs), fetched from EDGAR. Model reads the release and predicts the 5-day post-filing market-adjusted return. Control: text withheld.</p>
 <table><tr><th>Model</th><th>n</th><th>Hit rate</th><th>Spearman IC</th><th>L/S spread (bps)</th><th>Control IC</th></tr>
+<tr><td>anthropic_claude-sonnet-5.seed1</td><td>100</td><td>0.5789</td><td>0.172</td><td>732.1</td><td></td></tr>
+<tr><td>anthropic_claude-opus-5.seed1</td><td>100</td><td>0.55</td><td>0.1073</td><td>-48.0</td><td></td></tr>
 <tr><td>Claude Opus 5</td><td>100</td><td>0.52</td><td>0.0787</td><td>-197.2</td><td>0.2066</td></tr>
 <tr><td>Claude Sonnet 5</td><td>96</td><td>0.5495</td><td>0.0658</td><td>116.1</td><td>0.0407</td></tr>
+<tr><td>deepseek-ai_DeepSeek-V4-Flash.seed1</td><td>83</td><td>0.5476</td><td>0.0551</td><td>-71.6</td><td></td></tr>
 <tr><td>Kimi K2.6</td><td>97</td><td>0.5224</td><td>0.0419</td><td>-46.1</td><td>0.0906</td></tr>
 <tr><td>Claude Opus 4.8</td><td>99</td><td>0.4941</td><td>0.0417</td><td>-94.9</td><td>0.0571</td></tr>
 <tr><td>Kimi K3</td><td>96</td><td>0.5806</td><td>0.0382</td><td>-601.4</td><td>-0.0904</td></tr>
@@ -280,6 +282,7 @@ bars.</li>
 <tr><td>GPT-5.6 Sol</td><td>100</td><td>0.5231</td><td>0.0006</td><td>-334.0</td><td>-0.171</td></tr>
 <tr><td>GPT-5.4</td><td>100</td><td>0.5102</td><td>-0.0218</td><td>-25.5</td><td>0.0675</td></tr>
 <tr><td>MiniMax M3</td><td>100</td><td>0.4615</td><td>-0.0479</td><td>-124.0</td><td>0.1595</td></tr>
+<tr><td>x-ai_grok-4.5.seed1</td><td>100</td><td>0.5179</td><td>-0.067</td><td>-400.5</td><td></td></tr>
 <tr><td>GPT-5.5</td><td>100</td><td>0.4821</td><td>-0.0825</td><td>-170.8</td><td>-0.0039</td></tr>
 <tr><td>Gemini 3.6 Flash</td><td>100</td><td>0.459</td><td>-0.085</td><td>-350.3</td><td>-0.0441</td></tr>
 <tr><td>MiMo V2.5</td><td>99</td><td>0.4833</td><td>-0.0855</td><td>-458.3</td><td>-0.0056</td></tr>
