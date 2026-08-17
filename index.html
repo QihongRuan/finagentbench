@@ -43,8 +43,8 @@ models, one identical harness, one inference platform, script-graded.</p>
 <p><a href="https://github.com/QihongRuan/finagentbench">Source &amp; docs on GitHub →</a></p>
 </div>
 <div class="kpi">
-<div><b>23</b>frontier models, one identical harness, 214 graded agent runs</div>
-<div><b>22/23</b>models replicate a momentum study perfectly from spec — execution is commoditized</div>
+<div><b>29</b>frontier models, one identical harness, 220 graded agent runs</div>
+<div><b>23/29</b>models replicate a momentum study perfectly from spec — execution is commoditized</div>
 <div><b>IC 0.63</b>best model reading post-cutoff analyst articles; withheld-text controls collapse to ≈0</div>
 </div>
 <h2 id="key-findings">Key findings</h2><ol>
@@ -118,8 +118,14 @@ bars.</li>
 <tr><td>Kimi K3</td><td>1.0</td><td>1.0</td><td>5/5</td><td>2</td><td>$0.0270</td></tr>
 <tr><td>MiMo V2.5</td><td>1.0</td><td>1.0</td><td>5/5</td><td>2</td><td>$0.0013</td></tr>
 <tr><td>MiniMax M3</td><td>1.0</td><td>1.0</td><td>—</td><td>6</td><td>$0.0264</td></tr>
+<tr><td>MiniMaxAI/MiniMax-M2.7</td><td>1.0</td><td>1.0</td><td>—</td><td>7</td><td>$0.0182</td></tr>
 <tr><td>Qwen3.8 Max</td><td>1.0</td><td>1.0</td><td>4/5</td><td>3</td><td>$0.0294</td></tr>
 <tr><td>Nemotron 3 Ultra</td><td>0.0</td><td>0.0</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>Qwen/Qwen3.6-Plus</td><td>0.0</td><td>0.0</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>bytedance/seed-2.0-mini</td><td>0.0</td><td>0.0</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>kwaipilot/kat-coder-pro-v2</td><td>0.0</td><td>0.0</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>moonshotai/Kimi-K2.5</td><td>0.0</td><td>0.0</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>zai-org/GLM-4.7-FP8</td><td>0.0</td><td>0.0</td><td>—</td><td>—</td><td>—</td></tr>
 </table>
 <h3 id="t2-news-event-study">T2 · News event study</h3>
 <table><tr><th>Model</th><th>Strict</th><th>Loose</th><th>Consistency (strict across seeds)</th><th>Best steps</th><th>Best cost</th></tr>
@@ -199,6 +205,7 @@ bars.</li>
 <table><tr><th>Model</th><th>n</th><th>Hit rate</th><th>Spearman IC</th><th>L/S spread (bps)</th><th>Control IC</th><th>ΔIC (text − control)</th></tr>
 <tr><td>Claude Opus 5</td><td>1008</td><td>0.6713</td><td>0.522</td><td>973.7</td><td>0.5326</td><td>-0.0106</td></tr>
 <tr><td>Kimi K3</td><td>971</td><td>0.5637</td><td>0.2413</td><td>593.1</td><td>0.2157</td><td>0.0256</td></tr>
+<tr><td>Claude Opus 4.8</td><td>1008</td><td>0.5733</td><td>0.2299</td><td>550.6</td><td>0.1626</td><td>0.0673</td></tr>
 <tr><td>Gemini 3.1 Pro</td><td>1008</td><td>0.5712</td><td>0.1991</td><td>548.6</td><td>0.2281</td><td>-0.029</td></tr>
 <tr><td>Qwen3.8 Max</td><td>1000</td><td>0.5612</td><td>0.1658</td><td>344.2</td><td>0.179</td><td>-0.0132</td></tr>
 <tr><td>Claude Sonnet 5</td><td>1008</td><td>0.5481</td><td>0.1435</td><td>425.9</td><td>0.1187</td><td>0.0248</td></tr>
@@ -225,6 +232,8 @@ bars.</li>
 <tr><td>anthropic_claude-sonnet-5.seed2</td><td>297</td><td>0.461</td><td>0.4181</td><td>0.4414</td><td>UNDISCLOSED ⚠️</td><td>2274.2</td><td></td></tr>
 <tr><td>Claude Sonnet 5</td><td>297</td><td>0.4678</td><td>0.3889</td><td>0.4161</td><td>2026-01</td><td>2198.1</td><td>-0.1583</td></tr>
 <tr><td>moonshotai_kimi-k3.seed2</td><td>236</td><td>0.4831</td><td>0.3824</td><td>0.3357</td><td>UNDISCLOSED ⚠️</td><td>3250.1</td><td></td></tr>
+<tr><td>google_gemini-3.5-flash</td><td>296</td><td>0.449</td><td>0.368</td><td>0.4266</td><td>UNDISCLOSED ⚠️</td><td>2865.3</td><td>0.0491</td></tr>
+<tr><td>google_gemini-3-flash-preview</td><td>297</td><td>0.4561</td><td>0.3425</td><td>0.3345</td><td>UNDISCLOSED ⚠️</td><td>1737.3</td><td>0.0345</td></tr>
 <tr><td>GPT-5.6 Sol</td><td>297</td><td>0.4411</td><td>0.3251</td><td>0.3876</td><td>2026-02</td><td>2558.4</td><td>-0.1052</td></tr>
 <tr><td>anthropic_claude-sonnet-4.6</td><td>297</td><td>0.4646</td><td>0.3174</td><td>0.3319</td><td>UNDISCLOSED ⚠️</td><td>1917.4</td><td>-0.0876</td></tr>
 <tr><td>Claude Opus 4.6</td><td>297</td><td>0.431</td><td>0.2846</td><td>0.3942</td><td>UNDISCLOSED ⚠️</td><td>1775.9</td><td>0.1571</td></tr>
@@ -239,6 +248,7 @@ bars.</li>
 <tr><td>anthropic_claude-sonnet-4.5</td><td>297</td><td>0.4426</td><td>0.217</td><td>0.1823</td><td>UNDISCLOSED ⚠️</td><td>1589.6</td><td></td></tr>
 <tr><td>Grok 4.5</td><td>297</td><td>0.4257</td><td>0.2143</td><td>0.2718</td><td>2026-02</td><td>1096.4</td><td></td></tr>
 <tr><td>DeepSeek V4 Flash</td><td>292</td><td>0.4316</td><td>0.2056</td><td>0.2357</td><td>UNDISCLOSED ⚠️</td><td>1416.4</td><td>-0.0293</td></tr>
+<tr><td>MiniMaxAI_MiniMax-M2.7</td><td>266</td><td>0.4264</td><td>0.2026</td><td>0.2001</td><td>UNDISCLOSED ⚠️</td><td>920.1</td><td>-0.1788</td></tr>
 <tr><td>Kimi K2.6</td><td>264</td><td>0.4275</td><td>0.2022</td><td>0.163</td><td>UNDISCLOSED ⚠️</td><td>2285.2</td><td>0.0483</td></tr>
 <tr><td>x-ai_grok-4.5.seed2</td><td>297</td><td>0.4223</td><td>0.1991</td><td>0.2453</td><td>UNDISCLOSED ⚠️</td><td>1328.6</td><td></td></tr>
 <tr><td>XiaomiMiMo_MiMo-V2.5.seed1</td><td>296</td><td>0.4247</td><td>0.197</td><td>0.2308</td><td>UNDISCLOSED ⚠️</td><td>1560.8</td><td></td></tr>
@@ -248,10 +258,11 @@ bars.</li>
 <tr><td>zai-org_GLM-5-FP8</td><td>276</td><td>0.4197</td><td>0.1832</td><td>0.2132</td><td>UNDISCLOSED ⚠️</td><td>1260.9</td><td>-0.0697</td></tr>
 <tr><td>DeepSeek V4 Pro</td><td>142</td><td>0.4892</td><td>0.1776</td><td>0.2043</td><td>UNDISCLOSED ⚠️</td><td>222.8</td><td>-0.0639</td></tr>
 <tr><td>moonshotai_Kimi-K2.5</td><td>297</td><td>0.4242</td><td>0.1644</td><td>0.2038</td><td>UNDISCLOSED ⚠️</td><td>548.6</td><td>-0.1331</td></tr>
-<tr><td>deepseek-ai_DeepSeek-V3-0324</td><td>296</td><td>0.4155</td><td>0.1533</td><td>0.163</td><td>UNDISCLOSED ⚠️</td><td>1048.3</td><td>-0.0123</td></tr>
+<tr><td>google_gemini-3.5-flash-lite</td><td>297</td><td>0.4122</td><td>0.1632</td><td>0.2079</td><td>UNDISCLOSED ⚠️</td><td>1006.8</td><td></td></tr>
+<tr><td>deepseek-ai_DeepSeek-V3-0324</td><td>297</td><td>0.4175</td><td>0.1536</td><td>0.1641</td><td>UNDISCLOSED ⚠️</td><td>1048.3</td><td>-0.0123</td></tr>
 <tr><td>Claude Haiku 4.5</td><td>297</td><td>0.4377</td><td>0.149</td><td>0.1444</td><td>UNDISCLOSED ⚠️</td><td>782.2</td><td></td></tr>
 <tr><td>Hunyuan 3</td><td>278</td><td>0.417</td><td>0.1423</td><td>0.1164</td><td>UNDISCLOSED ⚠️</td><td>1044.3</td><td>0.0067</td></tr>
-<tr><td>deepseek-ai_DeepSeek-R1-0528</td><td>262</td><td>0.4423</td><td>0.1368</td><td>0.1479</td><td>UNDISCLOSED ⚠️</td><td>1203.3</td><td>-0.2132</td></tr>
+<tr><td>deepseek-ai_DeepSeek-R1-0528</td><td>283</td><td>0.4413</td><td>0.1338</td><td>0.123</td><td>UNDISCLOSED ⚠️</td><td>1098.4</td><td>-0.2132</td></tr>
 <tr><td>Gemma 4 31B</td><td>297</td><td>0.415</td><td>0.1319</td><td>0.1251</td><td>2025-01</td><td>747.9</td><td></td></tr>
 <tr><td>deepseek-ai_DeepSeek-V4-Flash.seed1</td><td>211</td><td>0.4265</td><td>0.1309</td><td>0.1639</td><td>UNDISCLOSED ⚠️</td><td>362.7</td><td></td></tr>
 <tr><td>DeepSeek V3.2</td><td>279</td><td>0.3943</td><td>0.1292</td><td>0.1567</td><td>UNDISCLOSED ⚠️</td><td>966.7</td><td>0.0534</td></tr>
@@ -259,13 +270,17 @@ bars.</li>
 <tr><td>google_gemma-4-31b-it.seed1</td><td>297</td><td>0.4136</td><td>0.0986</td><td>0.1143</td><td>UNDISCLOSED ⚠️</td><td>417.7</td><td></td></tr>
 <tr><td>Qwen_Qwen3.5-397B-A17B</td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><td>Qwen_Qwen3.6-Max-Preview</td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Qwen_Qwen3.6-Plus</td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><td>anthropic_claude-opus-4.1</td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><td>anthropic_claude-sonnet-4</td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>bytedance_seed-2.0-mini</td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>kwaipilot_kat-coder-pro-v2</td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><td>moonshotai_Kimi-K2-Thinking</td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><td>Nemotron 3 Ultra</td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><td>openai_gpt-4o</td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><td>openai_gpt-5</td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><td>openai_gpt-5.1</td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>openai_gpt-5.2</td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><td>zai-org_GLM-4.7-FP8</td><td>0</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 </table>
 <h3 id="b4-earnings-press-releases-post-cutoff">B4 · Earnings press releases (post-cutoff)</h3><p>8-K item-2.02 earnings press releases filed with the SEC Feb–Jul 2026 (after most models' training cutoffs), fetched from EDGAR. Model reads the release and predicts the 5-day post-filing market-adjusted return. Control: text withheld.</p>
