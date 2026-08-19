@@ -57,13 +57,17 @@ TASK_LABELS = {
 
 
 def slug_label(run_slug):
-    """Map a preds-file slug back to a display label (+ control marker)."""
+    """Map a preds-file slug back to (label, control, seed)."""
+    m = re.search(r"\.seed(\d+)$", run_slug)
+    seed = int(m.group(1)) if m else 0
+    if m:
+        run_slug = run_slug[: m.start()]
     control = run_slug.endswith(".control")
     base = run_slug[: -len(".control")] if control else run_slug
     for mid, lab in MODEL_LABELS.items():
         if mid.replace("/", "_").replace(" ", "_") == base:
-            return lab, control
-    return base, control
+            return lab, control, seed
+    return base, control, seed
 
 
 def load_track_a():
@@ -110,10 +114,26 @@ def load_track_b(name):
     p = ROOT / "trackB_news" / f"leaderboard_{name}.csv"
     if not p.exists():
         return []
-    rows = []
+    raw = []
     for r in csv.DictReader(open(p)):
-        lab, control = slug_label(r["run"])
-        rows.append({**r, "model": lab, "control": control})
+        lab, control, seed = slug_label(r["run"])
+        if not r.get("n") or int(r["n"]) == 0:
+            continue  # dead serving pool
+        raw.append({**r, "model": lab, "control": control, "seed": seed})
+    # aggregate replicate seeds: mean IC (±sd), keep seed-0 row as the base
+    def agg(group):
+        base = next((g for g in group if g["seed"] == 0), group[0])
+        ics = [float(g["spearman_ic"]) for g in group if g.get("spearman_ic")]
+        if len(ics) > 1:
+            import statistics
+            base = dict(base)
+            base["spearman_ic"] = f"{statistics.mean(ics):.3f} ±{statistics.stdev(ics):.3f} ({len(ics)})"
+        return base
+    from collections import defaultdict as _dd
+    bykey = _dd(list)
+    for r in raw:
+        bykey[(r["model"], r["control"])].append(r)
+    rows = [agg(g) for g in bykey.values()]
     main = [r for r in rows if not r["control"]]
     ctrl = {r["model"]: r for r in rows if r["control"]}
     for r in main:
@@ -121,10 +141,15 @@ def load_track_b(name):
         r["ctrl_ic"] = c["spearman_ic"] if c else ""
         r["ctrl_hit"] = c["hit_rate"] if c else ""
         try:
-            r["delta_ic"] = round(float(r["spearman_ic"]) - float(c["spearman_ic"]), 4)
-        except (TypeError, ValueError, KeyError):
+            r["delta_ic"] = round(float(str(r["spearman_ic"]).split()[0]) - float(str(c["spearman_ic"]).split()[0]), 4)
+        except (TypeError, ValueError, KeyError, AttributeError, IndexError):
             r["delta_ic"] = ""
-    main.sort(key=lambda r: -(float(r["spearman_ic"] or 0)))
+    def _icv(r):
+        try:
+            return float(str(r["spearman_ic"]).split()[0] or 0)
+        except (ValueError, TypeError):
+            return 0.0
+    main.sort(key=lambda r: -_icv(r))
     return main
 
 
@@ -189,7 +214,7 @@ models, one identical harness, one inference platform, script-graded.</p>
     n_models = len(set(m for task in agg.values() for m in task))
     n_runs = sum(len(runs) for task in agg.values() for runs in task.values())
     b2rows = load_track_b("b2")
-    top_b2 = max((float(r["spearman_ic"] or 0) for r in b2rows), default=0)
+    top_b2 = max((float(str(r["spearman_ic"] or 0).split()[0]) for r in b2rows if r.get("spearman_ic")), default=0)
     parts.append('<div class="kpi">')
     parts.append(f"<div><b>{n_models}</b>frontier models, one identical harness, "
                  f"{n_runs} graded agent runs</div>")
@@ -361,6 +386,38 @@ bars.</li>
             row += "</tr>"
             parts.append(row)
         parts.append("</table>")
+
+    # judgment across model generations
+    FAMILIES = [
+        ("Anthropic Claude Opus", ["Claude Opus 4.5", "Claude Opus 4.6", "Claude Opus 4.7", "Claude Opus 4.8", "Claude Opus 5"]),
+        ("Anthropic Claude Sonnet", ["Claude Sonnet 4.5", "Claude Sonnet 4.6", "Claude Sonnet 5"]),
+        ("OpenAI GPT", ["GPT-5.1", "GPT-5.2", "GPT-5.4", "GPT-5.5", "GPT-5.6 Sol", "GPT-5.6 Terra"]),
+        ("Alibaba Qwen", ["Qwen3.7 Max", "Qwen3.8 Max"]),
+        ("Moonshot Kimi", ["Kimi K2.5", "Kimi K2 Thinking", "Kimi K2.6", "Kimi K3"]),
+        ("DeepSeek", ["DeepSeek V3", "DeepSeek R1", "DeepSeek V3.2", "DeepSeek V4 Flash", "DeepSeek V4 Pro"]),
+        ("Zhipu GLM", ["GLM 4.7", "GLM 5", "GLM 5.2"]),
+        ("MiniMax", ["MiniMax M2.7", "MiniMax M3"]),
+    ]
+    b2map = {r["model"]: r for r in load_track_b("b2")}
+    gen_rows = []
+    for fam, seq in FAMILIES:
+        cells = [(m, b2map[m]) for m in seq if m in b2map]
+        if len(cells) >= 2:
+            gen_rows.append((fam, cells))
+    if gen_rows:
+        parts.append(
+            "<h2>Judgment across model generations</h2>"
+            "<p>Running each family's successive releases on the same post-cutoff "
+            "article sample asks: is financial judgment improving generation over "
+            "generation? Broadly yes — most families climb — though unevenly, and "
+            "several legacy serving pools were no longer available to test "
+            "(oldest generations excluded where marked on the platform).</p>"
+        )
+        for fam, cells in gen_rows:
+            parts.append(f"<h3>{fam}</h3><table><tr><th>Generation</th><th>Spearman IC</th><th>Hit rate</th><th>Control IC</th></tr>")
+            for m, r in cells:
+                parts.append("<tr>" + td(m) + td(r.get("spearman_ic", "")) + td(r.get("hit_rate", "")) + td(r.get("ctrl_ic", "")) + "</tr>")
+            parts.append("</table>")
 
     # cost-optimal routing table derived from Track A results
     parts.append(
