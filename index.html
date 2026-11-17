@@ -43,7 +43,7 @@ models, one identical harness, one inference platform, script-graded.</p>
 <p><a href="https://github.com/QihongRuan/finagentbench">Source &amp; docs on GitHub →</a></p>
 </div>
 <div class="kpi">
-<div><b>31</b>frontier models, one identical harness, 230 graded agent runs</div>
+<div><b>31</b>frontier models, one identical harness, 236 graded agent runs</div>
 <div><b>24/31</b>models replicate a momentum study perfectly from spec — execution is commoditized</div>
 <div><b>IC 0.61</b>best model reading post-cutoff analyst articles; withheld-text controls collapse to ≈0</div>
 </div>
@@ -121,7 +121,7 @@ bars.</li>
 <tr><td>MiniMax M3</td><td>1.0</td><td>1.0</td><td>—</td><td>6</td><td>$0.0264</td></tr>
 <tr><td>MiniMaxAI/MiniMax-M2.7</td><td>1.0</td><td>1.0</td><td>—</td><td>7</td><td>$0.0182</td></tr>
 <tr><td>Qwen3.8 Max</td><td>1.0</td><td>1.0</td><td>4/5</td><td>3</td><td>$0.0294</td></tr>
-<tr><td>Claude Opus 5.5</td><td>0.2</td><td>0.6</td><td>—</td><td>3</td><td>$0.0781</td></tr>
+<tr><td>Claude Opus 5.5</td><td>0.2</td><td>0.6</td><td>0/3</td><td>3</td><td>$0.0781</td></tr>
 <tr><td>Nemotron 3 Ultra</td><td>0.0</td><td>0.0</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>Qwen/Qwen3.6-Plus</td><td>0.0</td><td>0.0</td><td>—</td><td>—</td><td>—</td></tr>
 <tr><td>bytedance/seed-2.0-mini</td><td>0.0</td><td>0.0</td><td>—</td><td>—</td><td>—</td></tr>
@@ -179,7 +179,7 @@ bars.</li>
 <tr><td>Qwen3.8 Max</td><td>1.0</td><td>1.0</td><td>—</td><td>19</td><td>$0.7046</td></tr>
 <tr><td>GPT-5.4</td><td>0.8</td><td>1.0</td><td>—</td><td>1</td><td>$0.0300</td></tr>
 <tr><td>GPT-5.6 Sol</td><td>0.8</td><td>0.8</td><td>—</td><td>5</td><td>$0.1065</td></tr>
-<tr><td>Claude Opus 5.5</td><td>0.4</td><td>1.0</td><td>—</td><td>4</td><td>$0.1022</td></tr>
+<tr><td>Claude Opus 5.5</td><td>0.4</td><td>1.0</td><td>0/3</td><td>4</td><td>$0.0983</td></tr>
 <tr><td>Gemini 3.1 Pro</td><td>0.4</td><td>1.0</td><td>—</td><td>30</td><td>$1.0432</td></tr>
 <tr><td>DeepSeek V4 Flash</td><td>0.2</td><td>0.4</td><td>—</td><td>20</td><td>$0.0372</td></tr>
 </table>
@@ -198,10 +198,10 @@ bars.</li>
 <tr><td>MiniMax M3</td><td>1.0</td><td>1.0</td><td>—</td><td>14</td><td>$0.1622</td></tr>
 <tr><td>Qwen3.8 Max</td><td>1.0</td><td>1.0</td><td>3/3</td><td>15</td><td>$0.4760</td></tr>
 <tr><td>GPT-5.6 Sol</td><td>0.5</td><td>0.8</td><td>0/3</td><td>10</td><td>$0.3244</td></tr>
+<tr><td>Claude Sonnet 5.5</td><td>0.4</td><td>0.6</td><td>0/2</td><td>5</td><td>$0.1395</td></tr>
 <tr><td>Claude Haiku 4.5</td><td>0.4</td><td>0.5</td><td>—</td><td>8</td><td>$0.0991</td></tr>
 <tr><td>Claude Opus 4.8</td><td>0.4</td><td>0.5</td><td>—</td><td>9</td><td>$0.5695</td></tr>
-<tr><td>Claude Opus 5.5</td><td>0.4</td><td>0.5</td><td>—</td><td>4</td><td>$0.2503</td></tr>
-<tr><td>Claude Sonnet 5.5</td><td>0.4</td><td>0.5</td><td>—</td><td>6</td><td>$0.1395</td></tr>
+<tr><td>Claude Opus 5.5</td><td>0.4</td><td>0.5</td><td>0/2</td><td>4</td><td>$0.2503</td></tr>
 <tr><td>Gemini 3.1 Pro</td><td>0.4</td><td>0.5</td><td>0/3</td><td>12</td><td>$0.3600</td></tr>
 <tr><td>GPT-5.6 Terra</td><td>0.4</td><td>0.4</td><td>—</td><td>10</td><td>$0.2201</td></tr>
 <tr><td>Hunyuan 3</td><td>0.1</td><td>0.5</td><td>—</td><td>16</td><td>$0.0406</td></tr>
@@ -233,8 +233,8 @@ bars.</li>
 <h3 id="b2-analyst-articles-post-cutoff">B2 · Analyst articles (post-cutoff)</h3><p>Full-text investment research articles published Apr–Aug 2026 — after the training cutoff of the models under test. Model predicts 20-day market-adjusted return. Control: article withheld.</p>
 <table><tr><th>Model</th><th>n</th><th>Hit rate</th><th>Spearman IC</th><th>IC (Jun–Jul only)</th><th>Cutoff</th><th>L/S spread (bps)</th><th>Control IC</th></tr>
 <tr><td>Claude Opus 5</td><td>297</td><td>0.5118</td><td>0.610 ±0.028 (2)</td><td>0.6271</td><td>2026-05 ⚠️</td><td>4447.3</td><td>-0.0261</td></tr>
-<tr><td>Claude Opus 5.5</td><td>297</td><td>0.4983</td><td>0.5663</td><td>0.6082</td><td>UNDISCLOSED ⚠️</td><td>4535.6</td><td>0.0666</td></tr>
-<tr><td>Claude Sonnet 5.5</td><td>297</td><td>0.4746</td><td>0.4749</td><td>0.4621</td><td>UNDISCLOSED ⚠️</td><td>3555.8</td><td>-0.0428</td></tr>
+<tr><td>Claude Opus 5.5</td><td>297</td><td>0.4983</td><td>0.570 ±0.006 (2)</td><td>0.6082</td><td>UNDISCLOSED ⚠️</td><td>4535.6</td><td>0.0666</td></tr>
+<tr><td>Claude Sonnet 5.5</td><td>297</td><td>0.4746</td><td>0.486 ±0.015 (2)</td><td>0.4621</td><td>UNDISCLOSED ⚠️</td><td>3555.8</td><td>-0.0428</td></tr>
 <tr><td>GPT-5.5</td><td>292</td><td>0.476</td><td>0.449 ±0.027 (2)</td><td>0.562</td><td>UNDISCLOSED ⚠️</td><td>2759.0</td><td>0.0376</td></tr>
 <tr><td>Qwen3.8 Max</td><td>296</td><td>0.4881</td><td>0.446 ±0.025 (3)</td><td>0.6027</td><td>UNDISCLOSED ⚠️</td><td>2687.2</td><td></td></tr>
 <tr><td>Kimi K3</td><td>279</td><td>0.482</td><td>0.417 ±0.049 (2)</td><td>0.481</td><td>UNDISCLOSED ⚠️</td><td>2773.4</td><td>0.2397</td></tr>
@@ -242,7 +242,7 @@ bars.</li>
 <tr><td>google_gemini-3.5-flash</td><td>296</td><td>0.449</td><td>0.368</td><td>0.4266</td><td>UNDISCLOSED ⚠️</td><td>2865.3</td><td>0.0491</td></tr>
 <tr><td>google_gemini-3-flash-preview</td><td>297</td><td>0.4561</td><td>0.3425</td><td>0.3345</td><td>UNDISCLOSED ⚠️</td><td>1737.3</td><td>0.0345</td></tr>
 <tr><td>GPT-5.6 Sol</td><td>297</td><td>0.4411</td><td>0.3251</td><td>0.3876</td><td>2026-02</td><td>2558.4</td><td>-0.1052</td></tr>
-<tr><td>anthropic_claude-sonnet-4.6</td><td>297</td><td>0.4646</td><td>0.3174</td><td>0.3319</td><td>UNDISCLOSED ⚠️</td><td>1917.4</td><td>-0.0876</td></tr>
+<tr><td>Claude Sonnet 4.6</td><td>297</td><td>0.4646</td><td>0.3174</td><td>0.3319</td><td>UNDISCLOSED ⚠️</td><td>1917.4</td><td>-0.0876</td></tr>
 <tr><td>Claude Opus 4.6</td><td>297</td><td>0.431</td><td>0.2846</td><td>0.3942</td><td>UNDISCLOSED ⚠️</td><td>1775.9</td><td>0.1571</td></tr>
 <tr><td>Gemini 3.6 Flash</td><td>297</td><td>0.4527</td><td>0.2839</td><td>0.2685</td><td>UNDISCLOSED ⚠️</td><td>1845.6</td><td>0.1131</td></tr>
 <tr><td>Claude Opus 4.8</td><td>297</td><td>0.4257</td><td>0.2825</td><td>0.3092</td><td>UNDISCLOSED ⚠️</td><td>2864.3</td><td></td></tr>
@@ -252,7 +252,7 @@ bars.</li>
 <tr><td>MiniMax M3</td><td>293</td><td>0.4418</td><td>0.258</td><td>0.2526</td><td>UNDISCLOSED ⚠️</td><td>2048.9</td><td>0.0151</td></tr>
 <tr><td>GPT-5.4</td><td>297</td><td>0.4276</td><td>0.2579</td><td>0.2797</td><td>2025-08</td><td>1873.3</td><td>-0.0174</td></tr>
 <tr><td>GPT-5.6 Terra</td><td>297</td><td>0.4291</td><td>0.2414</td><td>0.2072</td><td>UNDISCLOSED ⚠️</td><td>1813.3</td><td>0.2342</td></tr>
-<tr><td>anthropic_claude-sonnet-4.5</td><td>297</td><td>0.4426</td><td>0.217</td><td>0.1823</td><td>UNDISCLOSED ⚠️</td><td>1589.6</td><td></td></tr>
+<tr><td>Claude Sonnet 4.5</td><td>297</td><td>0.4426</td><td>0.217</td><td>0.1823</td><td>UNDISCLOSED ⚠️</td><td>1589.6</td><td></td></tr>
 <tr><td>Grok 4.5</td><td>297</td><td>0.4257</td><td>0.207 ±0.011 (2)</td><td>0.2718</td><td>2026-02</td><td>1096.4</td><td></td></tr>
 <tr><td>MiniMaxAI_MiniMax-M2.7</td><td>266</td><td>0.4264</td><td>0.2026</td><td>0.2001</td><td>UNDISCLOSED ⚠️</td><td>920.1</td><td>-0.1788</td></tr>
 <tr><td>Kimi K2.6</td><td>264</td><td>0.4275</td><td>0.2022</td><td>0.163</td><td>UNDISCLOSED ⚠️</td><td>2285.2</td><td>0.0483</td></tr>
@@ -386,11 +386,13 @@ bars.</li>
 <tr><td>Claude Opus 4.7</td><td>0.2745</td><td>0.4291</td><td>-0.1365</td></tr>
 <tr><td>Claude Opus 4.8</td><td>0.2825</td><td>0.4257</td><td></td></tr>
 <tr><td>Claude Opus 5</td><td>0.610 ±0.028 (2)</td><td>0.5118</td><td>-0.0261</td></tr>
-<tr><td>Claude Opus 5.5</td><td>0.5663</td><td>0.4983</td><td>0.0666</td></tr>
+<tr><td>Claude Opus 5.5</td><td>0.570 ±0.006 (2)</td><td>0.4983</td><td>0.0666</td></tr>
 </table>
 <h3 id="anthropic-claude-sonnet">Anthropic Claude Sonnet</h3><table><tr><th>Generation</th><th>Spearman IC</th><th>Hit rate</th><th>Control IC</th></tr>
+<tr><td>Claude Sonnet 4.5</td><td>0.217</td><td>0.4426</td><td></td></tr>
+<tr><td>Claude Sonnet 4.6</td><td>0.3174</td><td>0.4646</td><td>-0.0876</td></tr>
 <tr><td>Claude Sonnet 5</td><td>0.415 ±0.024 (3)</td><td>0.4678</td><td>-0.1583</td></tr>
-<tr><td>Claude Sonnet 5.5</td><td>0.4749</td><td>0.4746</td><td>-0.0428</td></tr>
+<tr><td>Claude Sonnet 5.5</td><td>0.486 ±0.015 (2)</td><td>0.4746</td><td>-0.0428</td></tr>
 </table>
 <h3 id="openai-gpt">OpenAI GPT</h3><table><tr><th>Generation</th><th>Spearman IC</th><th>Hit rate</th><th>Control IC</th></tr>
 <tr><td>GPT-5.4</td><td>0.2579</td><td>0.4276</td><td>-0.0174</td></tr>
