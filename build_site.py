@@ -25,6 +25,8 @@ MODEL_LABELS = {
     "XiaomiMiMo/MiMo-V2.5": "MiMo V2.5",
     "google/gemma-4-31b-it": "Gemma 4 31B",
     "zai-org/GLM-5.2-FP8": "GLM 5.2",
+    "anthropic/claude-sonnet-5.5": "Claude Sonnet 5.5",
+    "anthropic/claude-opus-5.5": "Claude Opus 5.5",
     "anthropic/claude-sonnet-5": "Claude Sonnet 5",
     "anthropic/claude-opus-5": "Claude Opus 5",
     "Qwen/Qwen3.8-Max": "Qwen3.8 Max",
@@ -389,8 +391,8 @@ bars.</li>
 
     # judgment across model generations
     FAMILIES = [
-        ("Anthropic Claude Opus", ["Claude Opus 4.5", "Claude Opus 4.6", "Claude Opus 4.7", "Claude Opus 4.8", "Claude Opus 5"]),
-        ("Anthropic Claude Sonnet", ["Claude Sonnet 4.5", "Claude Sonnet 4.6", "Claude Sonnet 5"]),
+        ("Anthropic Claude Opus", ["Claude Opus 4.5", "Claude Opus 4.6", "Claude Opus 4.7", "Claude Opus 4.8", "Claude Opus 5", "Claude Opus 5.5"]),
+        ("Anthropic Claude Sonnet", ["Claude Sonnet 4.5", "Claude Sonnet 4.6", "Claude Sonnet 5", "Claude Sonnet 5.5"]),
         ("OpenAI GPT", ["GPT-5.1", "GPT-5.2", "GPT-5.4", "GPT-5.5", "GPT-5.6 Sol", "GPT-5.6 Terra"]),
         ("Alibaba Qwen", ["Qwen3.7 Max", "Qwen3.8 Max"]),
         ("Moonshot Kimi", ["Kimi K2.5", "Kimi K2 Thinking", "Kimi K2.6", "Kimi K3"]),
@@ -412,6 +414,11 @@ bars.</li>
             "generation? Broadly yes — most families climb — though unevenly, and "
             "several legacy serving pools were no longer available to test "
             "(oldest generations excluded where marked on the platform).</p>"
+            "<p class=\"sub\">Update 2026-11-17: Claude Opus 5.5 and Sonnet 5.5 added, "
+            "run through the vendor's own API with the identical prompt. These "
+            "releases likely postdate the article window, so the post-cutoff guarantee "
+            "does not hold for them; the text-withheld control IC is the "
+            "memorization check to read alongside.</p>"
         )
         for fam, cells in gen_rows:
             parts.append(f"<h3>{fam}</h3><table><tr><th>Generation</th><th>Spearman IC</th><th>Hit rate</th><th>Control IC</th></tr>")
